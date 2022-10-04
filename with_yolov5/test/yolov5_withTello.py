@@ -5,10 +5,11 @@ import numpy as np
 import cv2
 from time import time
 import sys
+import av
 
 #tello stuff
-from djitellopy import TelloSwarm
 from djitellopy import Tello
+import tellopy
 
 #for socket estimating
 import socket
@@ -17,11 +18,11 @@ import struct
 import imutils
 import threading
 
-#using set static Tello-edu's IP address to initialize object
-#from Swarm
-Tello1 = TelloSwarm.fromIps([
-        "192.168.0.103"
-])
+#connecting with Tello-edu's to initialize object
+
+
+
+
 
 class ObjectDetection:
 	"""
@@ -49,17 +50,29 @@ class ObjectDetection:
 		Function creates a streaming object to read the video from the file frame by frame.
 		:param self:  class object
 		:return:  OpenCV object to stream video frame by frame.
-		"""
-		cap = cv2.VideoCapture(0)
-		assert cap is not None
-		return cap
+   		"""
+		drone = tellopy.Tello()
+		drone.connect()
+		drone.wait_for_connection(60.0)
+		retry = 3
+		self.container = None
+		while self.container is None and 0 < retry:
+			retry -= 1
+			try:
+				container = av.open(drone.get_video_stream())
+			except av.AVError as ave:
+				print(ave)
+				print('retry...')
+		assert container is not None
+		print("Tello initialized successfully")
+		return container.decode(video=0)
 
 	def load_model(self):
 		"""
 		Function loads the yolo5 model from PyTorch Hub.
 		"""
 		path = r'/Applications/yolov5'
-		model = torch.hub.load(path, 'yolov5s',source='local', pretrained=True)
+		model = torch.hub.load(path, 'yolov5n',source='local', pretrained=True)
 		return model
 
 	def score_frame(self, frame):
@@ -96,27 +109,27 @@ class ObjectDetection:
 
 	def __call__(self):
 		player = self.get_video_from_file() # create streaming service for application
-		skip_frame=400
-		while skip_frame != 0:
-			skip_buffer = player.read()
-			skip_frame = skip_frame - 1
-		assert player.isOpened()
-		x_shape = int(player.get(cv2.CAP_PROP_FRAME_WIDTH))
-		y_shape = int(player.get(cv2.CAP_PROP_FRAME_HEIGHT))
-		while True:
-			start_time = time()
-			ret, frame = player.read()
-			if not ret:
-				break
+		#frame = player(frame)
+		#x_shape = int(frame.get(cv2.CAP_PROP_FRAME_WIDTH))
+		#y_shape = int(frame.get(cv2.CAP_PROP_FRAME_HEIGHT))
+		x_shape =400
+		y_shape =350
+		WIDTH =400
+		frame_skip = 300
+		for frame in player:
+			if 0 < frame_skip:
+				frame_skip = frame_skip - 1
+				continue
+			frame = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)
+			frame = imutils.resize(frame,width=WIDTH)
 			results = self.score_frame(frame)
 			frame = self.plot_boxes(results, frame)
 
 			cv2.imshow("ewe",frame)
 			cv2.waitKey(1)
-		player.release()
 
-
-a = ObjectDetection()
-a()
+if __name__ == "__main__":
+	a = ObjectDetection()
+	a()
 
 
