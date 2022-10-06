@@ -17,11 +17,7 @@ import struct
 import imutils
 import threading
 
-#using set static Tello-edu's IP address to initialize object
-#from Swarm
-Tello1 = TelloSwarm.fromIps([
-        "192.168.0.103"
-])
+
 
 class ObjectDetection:
 	"""
@@ -104,13 +100,21 @@ class ObjectDetection:
 		x_shape = int(player.get(cv2.CAP_PROP_FRAME_WIDTH))
 		y_shape = int(player.get(cv2.CAP_PROP_FRAME_HEIGHT))
 		while True:
-			start_time = time()
 			ret, frame = player.read()
 			if not ret:
 				break
 			results = self.score_frame(frame)
 			frame = self.plot_boxes(results, frame)
-
+			skip_detection=50	
+			while True:
+				ret, frame = player.read()
+				if skip_detection != 0:
+					frame = self.plot_boxes(results, frame)
+					skip_detection = skip_detection - 1
+					cv2.imshow("ewe",frame)
+					cv2.waitKey(1)
+					continue
+				break
 			cv2.imshow("ewe",frame)
 			cv2.waitKey(1)
 		player.release()
