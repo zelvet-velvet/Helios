@@ -120,11 +120,6 @@ class ObjectDetection:
 	def __call__(self):
 		player = self.get_video_from_file() # create streaming service for application
 		#frame = player(frame)
-		"""
-		for frame in player:
-			x_shape = int(frame.get(cv2.CAP_PROP_FRAME_WIDTH))
-			y_shape = int(frame.get(cv2.CAP_PROP_FRAME_HEIGHT))
-		"""
 		
 		WIDTH =400
 		frame_skip = 300

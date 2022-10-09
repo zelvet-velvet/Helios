@@ -3,7 +3,7 @@
 import torch
 import numpy as np
 import cv2
-from time import time
+import time
 import sys
 
 #tello stuff
@@ -17,7 +17,11 @@ import struct
 import imutils
 import threading
 
+import base64
 
+
+output=""
+player=""
 
 class ObjectDetection:
 	"""
@@ -40,6 +44,7 @@ class ObjectDetection:
 		self.model.iou = 0.3 # set inference IOU threshold at 0.3
 		self.model.classes = [0] # set model to only detect "Person" class
 		self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+		self.results=""
 	def get_video_from_file(self):
 		"""
 		Function creates a streaming object to read the video from the file frame by frame.
@@ -83,44 +88,87 @@ class ObjectDetection:
 			row = cord[i]
 			x1, y1, x2, y2 = int(row[0]*x_shape), int(row[1]*y_shape), int(row[2]*x_shape), int(row[3]*y_shape)
 			bgr = (0, 0, 255)
-			cv2.rectangle(frame, (x1, y1), (x2, y2), bgr, 1)
+			cv2.rectangle(frame, (x1, y1), (x2, y2), bgr, 3)
 			label = f"{int(row[4]*100)}"
 			cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 1)
 			cv2.putText(frame, f"Total Targets: {n}", (30, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
 		return frame
 
+	def modeling(self):
+		while True:
+			self.results = self.score_frame(self.frame)
+			time.sleep(.01)
+
 	def __call__(self):
+		global player
+		global output
 		player = self.get_video_from_file() # create streaming service for application
-		skip_frame=400
+		skip_frame=500
+
+		stream_modeling = threading.Thread(target = self.modeling)
+		Server_processing = threading.Thread(target = Server_process)
+		stream_modeling.daemon = True
+		Server_processing.daemon = True
+
+		#skip frame
 		while skip_frame != 0:
 			skip_buffer = player.read()
 			skip_frame = skip_frame - 1
+
+		ret, self.frame = player.read()
+		stream_modeling.start()
+		Server_processing.start()
+		time.sleep(2)
 		assert player.isOpened()
 		x_shape = int(player.get(cv2.CAP_PROP_FRAME_WIDTH))
-		y_shape = int(player.get(cv2.CAP_PROP_FRAME_HEIGHT))
+		y_shape = int(player.get(cv2.CAP_PROP_FRAME_HEIGHT))					   
+		WIDTH = 400
 		while True:
-			ret, frame = player.read()
+			ret, self.frame = player.read()
+			self.frame = imutils.resize(self.frame,width=WIDTH)
 			if not ret:
 				break
-			results = self.score_frame(frame)
-			frame = self.plot_boxes(results, frame)
-			skip_detection=50	
-			while True:
-				ret, frame = player.read()
-				if skip_detection != 0:
-					frame = self.plot_boxes(results, frame)
-					skip_detection = skip_detection - 1
-					cv2.imshow("ewe",frame)
-					cv2.waitKey(1)
-					continue
-				break
-			cv2.imshow("ewe",frame)
+			output = self.plot_boxes(self.results, self.frame)
+			local_show = imutils.resize(output, 700)
+			cv2.imshow("ewe",local_show)
 			cv2.waitKey(1)
 		player.release()
 
+def Server_process():
 
-a = ObjectDetection()
-a()
+	# Server socket
+	# create an INET, STREAMing socket
+	server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+	host_name  = socket.gethostname()
+	host_ip = socket.gethostbyname(host_name)
+
+	print('HOST IP:',"192.168.0.101")
+	port = 60050
+	socket_address = ("192.168.0.101",port)
+	print('Socket created')
+
+
+	# bind the socket to the host. 
+	#The values passed to bind() depend on the address family of the socket
+	server_socket.bind(socket_address)
+	print('Socket bind complete')
+	#listen() enables a server to accept() connections
+	#listen() has a backlog parameter. 
+	#It specifies the number of unaccepted connections that the system will allow before refusing new connections.
+
+	indata, Client_addr = server_socket.recvfrom(1024)
+	while True:
+		print('Connection from:',Client_addr)
+		while(player.isOpened()):
+			encoded,buffer = cv2.imencode('.jpg',output)
+			message = base64.b64encode(buffer)
+			server_socket.sendto(message,Client_addr)
+
+
+
+if __name__ == "__main__":
+	a = ObjectDetection()
+	a()
 
 
