@@ -17,8 +17,8 @@ pil_ok = cv2.cvtColor(ok, cv2.COLOR_BGR2RGB)
 predictor = openpifpaf.Predictor(checkpoint='resnet50', json_data=True )
 predictions, gt_anns, image_meta = predictor.numpy_image(pil_ok)
 
-"""
 print(predictions)
+"""
 print(predictions[0]["keypoints"])
 print(len(predictions[0]["keypoints"])/3)
 """
@@ -98,7 +98,7 @@ for l in range(len(predictions)):
 		i=i+3
 
 	# detect if someone gonna fall down
-	print(f"{l} head y: {int(kp[1])} hip y : {( int(kp[34]) + int(kp[37]) )/2}\n{int(kp[1]) - ( int(kp[34]) + int(kp[37]) )/2}")
+	print(f"{l} head y: {int(kp[1])} hip y : {( int(kp[34]) + int(kp[37]) )/2}\n{abs(int(kp[1]) - ( int(kp[34]) + int(kp[37]) )/2)}")
 	if abs( int(kp[1]) - ( int(kp[34]) + int(kp[37]) )/2 ) < 20:
 		# plot the frame of this person
 		upl = int(bbox[0]), int(bbox[1])

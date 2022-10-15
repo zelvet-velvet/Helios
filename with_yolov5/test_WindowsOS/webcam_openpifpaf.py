@@ -18,12 +18,22 @@ import pickle
 import struct
 import imutils
 import threading
-
 import base64
 
 
+try:
+	local_ip = sys.argv[1]
+	if local_ip == "--help":
+		print("usage: python3 webcam_openpifpaf.py [self_IP_addr]")
+		exit()
+except:
+	print("error : missing local IP parameter")
+	print("usage: python3 webcam_openpifpaf.py [self_IP_addr]")
+	exit()
+
 output=""
 player=""
+
 
 class ObjectDetection:
 	"""
@@ -58,7 +68,7 @@ class ObjectDetection:
 		Function loads the yolo5 model from PyTorch Hub.
 		"""
 		# mobilenetv3small, mobilenetv3large, resnet50, shufflenetv2k16, shufflenetv2k30
-		predictor = openpifpaf.Predictor(checkpoint='mobilenetv3large', json_data=True )
+		predictor = openpifpaf.Predictor(checkpoint='mobilenetv3small', json_data=True )
 		return predictor
 
 	def score_frame(self, frame):
@@ -152,18 +162,71 @@ class ObjectDetection:
 				cv2.circle(box_filter,(int(kp[i]), int(kp[i+1])), 2, (b, g, r), -1)
 				i=i+3
 
+			# set upper and lower body's datum point to detect if this person fall  
+			face_datumpoint, body_datumpoint=-3,-3, 
+			if kp[1]>0:
+				face_datumpoint = int(kp[1])
+			elif kp[4]>0 and kp[7]>0:
+		        	face_datumpoint = (int(kp[4])+int(kp[7]))/2
+			elif kp[13]>0 and kp[15]>0:
+				face_datumpoint = (int(kp[13])+int(kp[15]))/2	
+
+			if kp[34]>0 and kp[37]>0:
+				body_datumpoint = ( int(kp[34]) + int(kp[37]) )/2 
+			elif kp[40]>0 and kp[43]>0:
+				body_datumpoint = ( int(kp[40]) + int(kp[43]) )/2 
+			elif kp[46]>0 and kp[49]>0:
+				body_datumpoint = ( int(kp[46]) + int(kp[49]) )/2 
+
 			# detect if someone gonna fall down
-			if abs( int(kp[1]) - ( int(kp[34]) + int(kp[37]) )/2 ) < 20:
-				# plot the frame of this person
+			if abs( face_datumpoint - body_datumpoint ) < 10 and face_datumpoint!=-3 and body_datumpoint!=-3:
+				# plot on red frame if this person fall								
 				upl = int(bbox[0]), int(bbox[1])
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)		
-				cv2.putText(box_filter,"!!!Fall detected!!!", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
+				cv2.putText(box_filter,"Fall detected", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
 				fall = True
+
+
+			# set hands up pose detection
+			hands  = -3
+			if kp[22]>0 and kp[25]>0:
+				hands = (int(kp[22])+int(kp[25]))/2
+			if kp[28]>0 and kp[31]>0:
+				hands = (int(kp[28])+int(kp[31]))/2
+
+			if ( face_datumpoint - hands)  > 30 and hands!=-3:
+				# plot on the frame if this person put her hands up
+				upl = int(bbox[0])+2, int(bbox[1])+2
+				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
+				cv2.rectangle(box_filter, upl, buttomr, (0,255,255) , 1)
+				cv2.putText(box_filter,"Hands up", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,255,255), 1)
+			 
 		Transparency = 0.7
 		ok = cv2.addWeighted(box_filter, Transparency, ok, 1 - Transparency, 0)
 
 		return ok, fall
+	
+	"""
+	def runner_stop(self):
+		runner_buffer = []
+		while(True):
+			for l in range(len(self.predictions)):
+				bbox = predictions[l]["bbox"]
+				try:
+					if runner_buffer[l] = 
+
+
+			if len(runner_buffer)<len(predictions):
+				new_pp_index = len(predictions)-len(runner_buffer)
+				bbox = predictions[l]["bbox"]
+				runner_buffer[l].append(bbox[0],bbox[1])
+
+	
+	[0][1][2][3]
+	[0][1][2]
+	"""
+			
 
 	def modeling(self):
 		while True:
@@ -171,7 +234,7 @@ class ObjectDetection:
 			self.predictions, gt_anns, image_meta = self.score_frame(self.frame)
 			et = time.time()
 			elapsed_time = et - st
-			print('Execution time:', elapsed_time, 'seconds')
+			#print('Execution time:', elapsed_time, 'seconds')
 
 	def __call__(self):
 		global player
@@ -202,7 +265,7 @@ class ObjectDetection:
 			if not ret:
 				break
 			output, fall = self.plot_boxes(self.predictions, self.frame)
-			local_show = imutils.resize(output, 600)
+			local_show = imutils.resize(output, 1200)
 			"""
 			if fall:
 				print("Warning!!! Warning!!!")
@@ -219,9 +282,9 @@ def Server_process():
 	host_name  = socket.gethostname()
 	host_ip = socket.gethostbyname(host_name)
 
-	print('HOST IP:',"192.168.0.101")
+	print('Local IP:',local_ip)
 	port = 60050
-	socket_address = ("192.168.0.101",port)
+	socket_address = (local_ip,port)
 	print('Socket created')
 
 
@@ -232,7 +295,7 @@ def Server_process():
 	#listen() enables a server to accept() connections
 	#listen() has a backlog parameter. 
 	#It specifies the number of unaccepted connections that the system will allow before refusing new connections.
-
+	print("Wait for Client response")
 	indata, Client_addr = server_socket.recvfrom(1024)
 	while True:
 		print('Connection from:',Client_addr)

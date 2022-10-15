@@ -158,14 +158,45 @@ class ObjectDetection:
 				cv2.circle(box_filter,(int(kp[i]), int(kp[i+1])), 2, (b, g, r), -1)
 				i=i+3
 
+			# set upper and lower body's datum point to detect if this person fall  
+			face_datumpoint, body_datumpoint=-3,-3, 
+			if kp[1]>0:
+				face_datumpoint = int(kp[1])
+			elif kp[4]>0 and kp[7]>0:
+		        	face_datumpoint = (int(kp[4])+int(kp[7]))/2
+			elif kp[13]>0 and kp[15]>0:
+				face_datumpoint = (int(kp[13])+int(kp[15]))/2	
+
+			if kp[34]>0 and kp[37]>0:
+				body_datumpoint = ( int(kp[34]) + int(kp[37]) )/2 
+			elif kp[40]>0 and kp[43]>0:
+				body_datumpoint = ( int(kp[40]) + int(kp[43]) )/2 
+			elif kp[46]>0 and kp[49]>0:
+				body_datumpoint = ( int(kp[46]) + int(kp[49]) )/2 
+
 			# detect if someone gonna fall down
-			if abs( int(kp[1]) - ( int(kp[34]) + int(kp[37]) )/2 ) < 20:
-				# plot the frame of this person
+			if abs( face_datumpoint - body_datumpoint ) < 10 and face_datumpoint!=-3 and body_datumpoint!=-3:
+				# plot on red frame if this person fall
 				upl = int(bbox[0]), int(bbox[1])
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)		
-				cv2.putText(box_filter,"!!!Fall detected!!!", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
+				cv2.putText(box_filter,"Fall detected", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
 				fall = True
+
+			# set hands up pose detection
+			left_hand, right_hand  = -3,-3
+			if kp[22]>0 and kp[25]>0:
+				left_hand, right_hand=kp[22], kp[25]
+			if kp[28]>0 and kp[31]>0:
+				left_hand, right_hand=kp[28], kp[31]
+
+			if abs( left_hand - right_hand ) < 10 and left_hand!=-3 and right_hand!=-3:
+				# plot on the frame if this person put her hands up
+				upl = int(bbox[0])+2, int(bbox[1])+2
+				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
+				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)
+				cv2.putText(box_filter,"Hands up", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,255,255), 1)
+
 		Transparency = 0.7
 		ok = cv2.addWeighted(box_filter, Transparency, ok, 1 - Transparency, 0)
 
