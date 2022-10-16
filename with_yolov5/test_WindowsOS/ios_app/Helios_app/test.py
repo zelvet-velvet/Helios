@@ -47,13 +47,12 @@ class ScreenManager(ScreenManager):
 
 #kv = Builder.load_file("tt.kv")
 
-class Helios(App):
+class test(App):
 	def build(self):
 		Window.size = (321, 694.5)
-		#return kv
-		pass
+		return 
 if __name__ == "__main__":
-	Helios().run()
+	test().run()
 
 
 
