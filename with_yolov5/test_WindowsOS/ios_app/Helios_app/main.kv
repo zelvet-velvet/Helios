@@ -1,0 +1,830 @@
+
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManager:
+	transition: FadeTransition()
+	duration: .001	
+	RunnerList_page:
+	#Stream_page:
+	Profile_page:
+	Drone_page:
+	Notifications_page:
+	Map_page:
+
+#:set list_color 255/255.0, 239/255.0, 230/255.0, 1
+#:set profile_color 242/255.0, 251/255.0, 255/255.0, 1
+#:set drone_color 255/255.0, 244/255.0, 224/255.0, 1
+#:set notification_color 255/255.0, 232/255.0, 244/255.0, 1
+#:set map_color 224/255, 241/255, 255/255, 1
+
+<RunnerList_page>:
+	name: 'list'
+	RelativeLayout:			
+		# Root background
+		canvas:
+			Color:
+				rgba: list_color
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		
+		# logo "Helios"'s background image
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 100/100
+				Line:
+					width: 1.1
+					points: 170,1220,315,1220
+			source: "drawable/2.png"
+			pos_hint: {'center_x':.3, 'center_y':0.87}
+			allow_stretch: False
+			size_hint_x: 0.4
+
+		# APP's above text logo "Helios"
+		Label:
+			pos_hint: {'center_x':.26, 'center_y':0.91}
+			markup: True
+			text: "Helios"
+			font_size: 120
+			font_name: "font/GreatVibes-Regular.otf"
+			color: 0,0,0,1
+	
+		ScrollView:
+			do_scroll_y: True
+			do_scroll_x: False
+			bar_width: 15
+			bar_color: 252/255, 199/255, 101/255, .7
+			scroll_wheel_distance: 85
+			size_hint: (1, .72)
+			pos_hint: {'center_x': .5, 'center_y': .49}
+			RelativeLayout: 
+				height: 1500
+				size_hint: 1, None
+				btn_size: 380,380
+
+	
+		# bottom_bar's middle background
+		FloatLayout:
+			
+			canvas:
+				Color:
+					rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				RoundedRectangle:	
+					#size_hint: None,None
+					radius: [50, 50,50, 50]	
+					# (321-size_x/2, 125.01-size_y/2)i
+					#  ^ + 4.5
+					pos: 242, 42.51
+					size: (165, 165)
+				
+		BoxLayout:
+			size_hint: None,None
+			pos_hint: {'center_x':.5, 'center_y':0.09}
+			orientation: 'horizontal'
+			size: (self.parent.width, 130)
+			canvas:
+				Color:
+					rgba: 255/255.0, 159/255.0,99/255.0, 100/100
+				Rectangle:
+					size: self.size
+					pos: self.pos
+	
+			Button:
+				background_normal: 'drawable/profile.png'
+				background_down: 'drawable/profile.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'profile'
+			Button:
+				background_normal: 'drawable/drone.png'
+				background_down: 'drawable/drone.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'drone'
+			Button:
+				background_normal: 'drawable/middle.png'
+				background_down: 'drawable/middle.png'
+				rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				size: 135, 135
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: app.root.current = 'list'
+			Button:
+				background_normal: 'drawable/notifications.png'
+				background_down: 'drawable/notifications.png'
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'notification'
+			Button:
+				background_normal: 'drawable/map.png'
+				background_down: 'drawable/map.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'map'
+			
+<Profile_page>:
+	name: 'profile'
+	RelativeLayout:		
+		# Root background
+		canvas:
+			Color:
+				rgba: profile_color
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		
+		# logo "Helios"'s background image
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 100/100
+				Line:
+					width: 1.1
+					points: 170,1220,315,1220
+			source: "drawable/2.png"
+			pos_hint: {'center_x':.3, 'center_y':0.87}
+			allow_stretch: False
+			size_hint_x: 0.4
+		
+		# APP's above text logo "Helios"
+		Label:
+			pos_hint: {'center_x':.26, 'center_y':0.91}
+			markup: True
+			text: "Helios"
+			font_size: 120
+			font_name: "font/GreatVibes-Regular.otf"
+			color: 0,0,0,1
+	
+		# headshot
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 0/100
+				Line:
+					width: 2
+					points: 180,1220,300,1220
+			source: "drawable/headshot.JPG"
+			pos_hint: {'center_x':.5, 'center_y':0.66}
+			allow_stretch: False
+			size_hint_x: 0.6
+
+		# QR code
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 0/100
+				Line:
+					width: 2
+					points: 180,1220,300,1220
+			source: "drawable/QR_code.JPG"
+			pos_hint: {'center_x':.5, 'center_y':0.36}
+			allow_stretch: False
+			size_hint_x: 0.45
+	
+		# staff number
+		Label:
+			pos_hint: {'center_x':.5, 'center_y':0.22}
+			markup: True
+			text: "Staff code:"
+			font_size: 55
+			bold: True
+			color: 0,0,0,1
+
+		# staff number
+		Label:
+			pos_hint: {'center_x':.5, 'center_y':.2}
+			markup: True
+			text: "\nQWE19K38"
+			font_size: 45
+			bold: True
+			color: 0,0,0,1
+
+		
+		# bottom_bar's middle background
+		FloatLayout:
+			
+			canvas:
+				Color:
+					rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				RoundedRectangle:	
+					#size_hint: None,None
+					radius: [50, 50,50, 50]	
+					# (321-size_x/2, 125.01-size_y/2)i
+					#  ^ + 4.5
+					pos: 242, 42.51
+					size: (165, 165)
+	
+		BoxLayout:
+			size_hint: None,None
+			pos_hint: {'center_x':.5, 'center_y':0.09}
+			orientation: 'horizontal'
+			size: (self.parent.width, 130)
+			canvas:
+				Color:
+					rgba: 255/255.0, 159/255.0,99/255.0, 100/100
+				Rectangle:
+					size: self.size
+					pos: self.pos
+	
+			Button:
+				background_normal: 'drawable/profile.png'
+				background_down: 'drawable/profile.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+			Button:
+				background_normal: 'drawable/drone.png'
+				background_down: 'drawable/drone.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'drone'
+			Button:
+				background_normal: 'drawable/middle.png'
+				background_down: 'drawable/middle.png'
+				rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				size: 135, 135
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'list'
+			Button:
+				background_normal: 'drawable/notifications.png'
+				background_down: 'drawable/notifications.png'
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'notification'
+			Button:
+				background_normal: 'drawable/map.png'
+				background_down: 'drawable/map.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'map'
+
+<Drone_page>:
+	name: 'drone'
+	RelativeLayout:		
+		# Root background
+		canvas:
+			Color:
+				rgba: drone_color
+			Rectangle:
+				size: self.size
+				pos: self.pos
+
+		# logo "Helios"'s background image
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 100/100
+				Line:
+					width: 1.1
+					points: 170,1220,315,1220
+			source: "drawable/2.png"
+			pos_hint: {'center_x':.3, 'center_y':0.87}
+			allow_stretch: False
+			size_hint_x: 0.4
+		
+		
+		# APP's above text logo "Helios"
+		Label:
+			pos_hint: {'center_x':.26, 'center_y':0.91}
+			markup: True
+			text: "Helios"
+			font_size: 120
+			font_name: "font/GreatVibes-Regular.otf"
+			color: 0,0,0,1
+	
+		ScrollView:
+			do_scroll_y: True
+			do_scroll_x: False
+			bar_width: 15
+			bar_color: 252/255, 199/255, 101/255, .7
+			scroll_wheel_distance: 85
+			size_hint: (1, .72)
+			pos_hint: {'center_x': .5, 'center_y': .49}
+			RelativeLayout: 
+				height: 1500
+				size_hint: 1, None
+				btn_size: 380,380
+				#:set btn_size 265, 265
+				#:set btn_color 252/255, 199/255, 101/255, 1
+
+				#:set left_posX .27
+				#:set right_posX .73
+
+				#:set posY_1 .9
+				#:set posY_2 .7
+				#:set posY_3 .5 
+				#:set posY_4 .3
+				#:set posY_5 .1
+
+				#:set lb_bias .06
+
+				#:set b 50,50,50,50
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': left_posX, 'center_y': posY_1}
+				Label:	
+					pos_hint: {'center_x': left_posX, 'center_y': posY_1-lb_bias}
+					text: "Drn_1"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': right_posX, 'center_y': posY_1}
+				Label:	
+					pos_hint: {'center_x': right_posX, 'center_y': posY_1-lb_bias}
+					text: "Drn_2"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign:
+
+				# ------- live drone -------#
+
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None 
+					size: btn_size
+					pos_hint: {'center_x': left_posX, 'center_y': posY_2}
+					on_release: 
+						app.root.current = 'stream'
+						stream_on = True
+				Label:	
+					pos_hint: {'center_x': left_posX, 'center_y': posY_2-lb_bias}
+					text: "Drn_3"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign:
+
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': right_posX, 'center_y': posY_2}
+				Label:	
+					pos_hint: {'center_x': right_posX, 'center_y': posY_2-lb_bias}
+					text: "Drn_4"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': left_posX, 'center_y': posY_3}
+				Label:	
+					pos_hint: {'center_x': left_posX, 'center_y': posY_3-lb_bias}
+					text: "Drn_5"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': right_posX, 'center_y': posY_3}
+				Label:	
+					pos_hint: {'center_x': right_posX, 'center_y': posY_3-lb_bias}
+					text: "Drn_6"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': left_posX, 'center_y': posY_4}
+				Label:	
+					pos_hint: {'center_x': left_posX, 'center_y': posY_4-lb_bias}
+					text: "Drn_7"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': right_posX, 'center_y': posY_4}
+				Label:	
+					pos_hint: {'center_x': right_posX, 'center_y': posY_4-lb_bias}
+					text: "Drn_8"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': left_posX, 'center_y': posY_5}
+				Label:	
+					pos_hint: {'center_x': left_posX, 'center_y': posY_5-lb_bias}
+					text: "Drn_9"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+				Button:
+					canvas.before:
+						Color:
+							rgba: btn_color
+						RoundedRectangle:
+							size: self.size
+							pos: self.pos
+							radius: [48]
+					background_normal: 'drawable/d1.png'
+					background_down: 'drawable/d2.png'
+					size_hint: None, None
+					size: btn_size
+					pos_hint: {'center_x': right_posX, 'center_y': posY_5}
+				Label:	
+					pos_hint: {'center_x': right_posX, 'center_y': posY_5-lb_bias}
+					text: "Drn_10"
+					color: 0,0,0,1
+					font_size: 40
+					bold: True
+					halign: 'center'
+					valign: 
+		
+		# bottom_bar's middle background
+		FloatLayout:
+			
+			canvas:
+				Color:
+					rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				RoundedRectangle:	
+					#size_hint: None,None
+					radius: [50, 50,50, 50]	
+					# (321-size_x/2, 125.01-size_y/2)i
+					#  ^ + 4.5
+					pos: 242, 42.51
+					size: (165, 165)
+					
+		BoxLayout:
+			size_hint: None,None
+			pos_hint: {'center_x':.5, 'center_y':0.09}
+			orientation: 'horizontal'
+			size: (self.parent.width, 130)
+			canvas:
+				Color:
+					rgba: 255/255.0, 159/255.0,99/255.0, 100/100
+				Rectangle:
+					size: self.size
+					pos: self.pos
+	
+			Button:
+				background_normal: 'drawable/profile.png'
+				background_down: 'drawable/profile.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'profile'
+			Button:
+				background_normal: 'drawable/drone.png'
+				background_down: 'drawable/drone.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+			Button:
+				background_normal: 'drawable/middle.png'
+				background_down: 'drawable/middle.png'
+				rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				size: 135, 135
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'list'
+			Button:
+				background_normal: 'drawable/notifications.png'
+				background_down: 'drawable/notifications.png'
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'notification'
+			Button:
+				background_normal: 'drawable/map.png'
+				background_down: 'drawable/map.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'map'
+<Stream_page>:
+	name: 'stream'
+	Stream:
+		
+
+<Notifications_page>:
+	name: 'notification'
+	RelativeLayout:		
+		# Root background
+		canvas:
+			Color:
+				rgba: notification_color
+			Rectangle:
+				size: self.size
+				pos: self.pos
+
+		# logo "Helios"'s background image
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 100/100
+				Line:
+					width: 1.1
+					points: 170,1220,315,1220
+			source: "drawable/2.png"
+			pos_hint: {'center_x':.3, 'center_y':0.87}
+			allow_stretch: False
+			size_hint_x: 0.4
+		
+		# APP's above text logo "Helios"
+		Label:
+			pos_hint: {'center_x':.26, 'center_y':0.91}
+			markup: True
+			text: "Helios"
+			font_size: 120
+			font_name: "font/GreatVibes-Regular.otf"
+			color: 0,0,0,1
+	
+		# bottom_bar's middle background
+		FloatLayout:
+			
+			canvas:
+				Color:
+					rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				RoundedRectangle:	
+					#size_hint: None,None
+					radius: [50, 50,50, 50]	
+					# (321-size_x/2, 125.01-size_y/2)i
+					#  ^ + 4.5
+					pos: 242, 42.51
+					size: (165, 165)
+	
+		BoxLayout:
+			size_hint: None,None
+			pos_hint: {'center_x':.5, 'center_y':0.09}
+			orientation: 'horizontal'
+			size: (self.parent.width, 130)
+			canvas:
+				Color:
+					rgba: 255/255.0, 159/255.0,99/255.0, 100/100
+				Rectangle:
+					size: self.size
+					pos: self.pos
+	
+			Button:
+				background_normal: 'drawable/profile.png'
+				background_down: 'drawable/profile.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'profile'
+			Button:
+				background_normal: 'drawable/drone.png'
+				background_down: 'drawable/drone.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'drone'
+			Button:
+				background_normal: 'drawable/middle.png'
+				background_down: 'drawable/middle.png'
+				rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				size: 135, 135
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'list'
+
+			Button:
+				background_normal: 'drawable/notifications.png'
+				background_down: 'drawable/notifications.png'
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+			Button:
+				background_normal: 'drawable/map.png'
+				background_down: 'drawable/map.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'map'
+
+
+<Map_page>:
+	name: 'map'
+	RelativeLayout:		
+		# Root background
+		canvas:
+			Color:
+				rgba: 232/255.0, 255/255.0, 214/255.0, 100/100
+			Rectangle:
+				size: self.size
+				pos: self.pos		
+		
+		# logo "Helios"'s background image
+		Image:
+			canvas:
+				Color:
+					rgba: 0,0,0, 100/100
+				Line:
+					width: 1.1
+					points: 170,1220,315,1220
+			source: "drawable/2.png"
+			pos_hint: {'center_x':.3, 'center_y':0.87}
+			allow_stretch: False
+			size_hint_x: 0.4
+		
+		
+		# APP's above text logo "Helios"
+		Label:
+			pos_hint: {'center_x':.26, 'center_y':0.91}
+			markup: True
+			text: "Helios"
+			font_size: 120
+			font_name: "font/GreatVibes-Regular.otf"
+			color: 0,0,0,1
+	
+		# bottom_bar's middle background
+		FloatLayout:
+			
+			canvas:
+				Color:
+					rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				RoundedRectangle:	
+					#size_hint: None,None
+					radius: [50, 50,50, 50]	
+					# (321-size_x/2, 125.01-size_y/2)i
+					#  ^ + 4.5
+					pos: 242, 42.51
+					size: (165, 165)
+	
+		BoxLayout:
+			size_hint: None,None
+			pos_hint: {'center_x':.5, 'center_y':0.09}
+			orientation: 'horizontal'
+			size: (self.parent.width, 130)
+			canvas:
+				Color:
+					rgba: 255/255.0, 159/255.0,99/255.0, 100/100
+				Rectangle:
+					size: self.size
+					pos: self.pos
+	
+			Button:
+				background_normal: 'drawable/profile.png'
+				background_down: 'drawable/profile.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'profile'
+			Button:
+				background_normal: 'drawable/drone.png'
+				background_down: 'drawable/drone.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'drone'
+			Button:
+				background_normal: 'drawable/middle.png'
+				background_down: 'drawable/middle.png'
+				rgba: 255/255.0, 158/255.0,23/255.0, 100/100
+				size: 135, 135
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'list'
+
+			Button:
+				background_normal: 'drawable/notifications.png'
+				background_down: 'drawable/notifications.png'
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+				on_release: 
+					app.root.current = 'notification'
+			Button:
+				background_normal: 'drawable/map.png'
+				background_down: 'drawable/map.png'	
+				size: 128.4, 128.4
+				pos_hint: {'center_x':.5, 'center_y':0.5}
+				size_hint: None, None
+
+
+

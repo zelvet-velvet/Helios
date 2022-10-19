@@ -2,8 +2,9 @@
 
 ScreenManager:
 	transition: FadeTransition()
-	duration: 0.001	
+	duration: .001	
 	RunnerList_page:
+	Stream_page
 	Profile_page:
 	Drone_page:
 	Notifications_page:
@@ -396,7 +397,8 @@ ScreenManager:
 					size: btn_size
 					pos_hint: {'center_x': left_posX, 'center_y': posY_2}
 					on_release: 
-						app.root.current = ''
+						app.root.current = 'stream'
+						stream_on = True
 				Label:	
 					pos_hint: {'center_x': left_posX, 'center_y': posY_2-lb_bias}
 					text: "Drn_3"
@@ -621,7 +623,7 @@ ScreenManager:
 					app.root.current = 'map'
 <Stream_page>:
 	name: 'stream'
-	RelativeLayout:
+	Stream:
 		
 
 <Notifications_page>:

@@ -19,6 +19,7 @@ except:
 	print("error : missing local IP parameter")
 	print("usage: python3 C_UDP.py [self_IP_addr] [server_IP_addr]")
 	exit()
+#socket.gethostbyname_ex(socket.gethostname())[-1][1]
 
 # Client socket
 # create an INET, STREAMing socket : 

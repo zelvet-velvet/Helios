@@ -7,7 +7,7 @@ import cv2
 
 
 class KivyCamera(Image):
-    def __init__(self, capture, fps, **kwargs):
+    def __init__(self,  **kwargs):
         super(KivyCamera, self).__init__(**kwargs)
         self.capture = capture
         Clock.schedule_interval(self.update, 1.0 / fps)

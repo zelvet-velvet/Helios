@@ -31,9 +31,10 @@ except:
 	print("usage: python3 webcam_openpifpaf.py [self_IP_addr]")
 	exit()
 
-output=""
-player=""
-
+output = ""
+player = ""
+fall = False
+hands_up = False
 
 class ObjectDetection:
 	"""
@@ -87,6 +88,7 @@ class ObjectDetection:
 		:param frame: frame on which to  make the plots
 		:return: new frame with boxes and labels plotted.
 		"""
+		global fall 
 		fall = False
 		box_filter = ok.copy()
 		for l in range(len(predictions)):
@@ -201,11 +203,12 @@ class ObjectDetection:
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,255,255) , 1)
 				cv2.putText(box_filter,"Hands up", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,255,255), 1)
-			 
+				hands_up  = True	
+
 		Transparency = 0.7
 		ok = cv2.addWeighted(box_filter, Transparency, ok, 1 - Transparency, 0)
 
-		return ok, fall
+		return ok
 	
 	"""
 	def runner_stop(self):
@@ -254,7 +257,7 @@ class ObjectDetection:
 
 		ret, self.frame = player.read()
 		stream_modeling.start()
-		#Server_processing.start()
+		Server_processing.start()
 		time.sleep(2)
 		assert player.isOpened()
 
@@ -264,14 +267,14 @@ class ObjectDetection:
 			self.frame = imutils.resize(frame,width=WIDTH)
 			if not ret:
 				break
-			output, fall = self.plot_boxes(self.predictions, self.frame)
+			output = self.plot_boxes(self.predictions, self.frame)
 			local_show = imutils.resize(output, 1200)
 			"""
 			if fall:
 				print("Warning!!! Warning!!!")
 			"""
-			cv2.imshow("ewe",local_show)
-			cv2.waitKey(1)
+			#cv2.imshow("ewe",local_show)
+			#cv2.waitKey(1)
 		player.release()
 
 def Server_process():
@@ -300,6 +303,10 @@ def Server_process():
 	while True:
 		print('Connection from:',Client_addr)
 		while(player.isOpened()):
+			if fall:
+				server_socket.sendto("fall".encode(),Client_addr)
+			if hands_up:
+				server_socket.sendto("hands_up".encode(),Client_addr)
 			encoded,buffer = cv2.imencode('.jpg',output)
 			message = base64.b64encode(buffer)
 			server_socket.sendto(message,Client_addr)
