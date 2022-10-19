@@ -272,8 +272,8 @@ class ObjectDetection:
 			if fall:
 				print("Warning!!! Warning!!!")
 			"""
-			#cv2.imshow("ewe",local_show)
-			#cv2.waitKey(1)
+			cv2.imshow("ewe",local_show)
+			cv2.waitKey(1)
 		player.release()
 
 def Server_process():
