@@ -89,7 +89,7 @@ class ObjectDetection:
 		:return: new frame with boxes and labels plotted.
 		"""
 		global fall
-	        global hands_up	
+		global hands_up
 		box_filter = ok.copy()
 		for l in range(len(predictions)):
 			# the color of each person's body dot
