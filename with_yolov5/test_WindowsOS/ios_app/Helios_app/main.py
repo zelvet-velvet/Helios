@@ -49,13 +49,13 @@ class Stream(Image):
 		data = b""
 		payload_size = struct.calcsize("Q")
 		ip=('192.168.0.100',self.port)
-		self.client_socket.sendto(b"ewe!",ip)
+		#self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
 	def update(self, dt):
 		packet,_ = self.client_socket.recvfrom(65536)
-		if packet = "fall":
+		if packet.decode() == "fall":
 			print("fall")		
-		if packet = "hands_up":
+		if packet.decode() == "hands_up":
 			print("hands_up")
 		else:
 			start_time = time.time()
@@ -70,7 +70,7 @@ class Stream(Image):
 			image_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
 			# display image from the texture
 			self.texture = image_texture
-			print("FPS: ", 1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
+			#print("FPS: ", 1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
 
 class RunnerList_page(Screen):
 	pass

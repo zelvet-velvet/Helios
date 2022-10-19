@@ -89,7 +89,6 @@ class ObjectDetection:
 		:return: new frame with boxes and labels plotted.
 		"""
 		global fall 
-		fall = False
 		box_filter = ok.copy()
 		for l in range(len(predictions)):
 			# the color of each person's body dot
@@ -279,6 +278,9 @@ class ObjectDetection:
 
 def Server_process():
 
+	global fall 
+	global hands_up
+
 	# Server socket
 	# create an INET, STREAMing socket
 	server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
@@ -303,10 +305,14 @@ def Server_process():
 	while True:
 		print('Connection from:',Client_addr)
 		while(player.isOpened()):
+
 			if fall:
-				server_socket.sendto("fall".encode(),Client_addr)
+				server_socket.sendto("fall".encode(), Client_addr)
+				fall = False
 			if hands_up:
-				server_socket.sendto("hands_up".encode(),Client_addr)
+				server_socket.sendto("hands_up".encode(), Client_addr)
+				hands_up = False
+
 			encoded,buffer = cv2.imencode('.jpg',output)
 			message = base64.b64encode(buffer)
 			server_socket.sendto(message,Client_addr)
