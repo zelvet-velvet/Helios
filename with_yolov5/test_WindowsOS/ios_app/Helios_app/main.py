@@ -49,7 +49,7 @@ class Stream(Image):
 		data = b""
 		payload_size = struct.calcsize("Q")
 		ip=('192.168.0.100',self.port)
-		#self.client_socket.sendto(b"ewe!",ip)
+		self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
 	def update(self, dt):
 		packet,_ = self.client_socket.recvfrom(65536)

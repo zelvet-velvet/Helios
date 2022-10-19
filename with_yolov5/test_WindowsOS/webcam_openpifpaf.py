@@ -308,9 +308,11 @@ def Server_process():
 
 			if fall:
 				server_socket.sendto("fall".encode(), Client_addr)
+				print(fall)
 				fall = False
 			if hands_up:
 				server_socket.sendto("hands_up".encode(), Client_addr)
+				print(hands_up)
 				hands_up = False
 
 			encoded,buffer = cv2.imencode('.jpg',output)
