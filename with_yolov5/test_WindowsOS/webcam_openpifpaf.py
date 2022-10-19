@@ -305,7 +305,7 @@ def Server_process():
 	while True:
 		print('Connection from:',Client_addr)
 		while(player.isOpened()):
-
+			print(fall,hands_up)
 			if fall:
 				server_socket.sendto("fall".encode(), Client_addr)
 				print(fall)
