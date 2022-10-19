@@ -88,7 +88,8 @@ class ObjectDetection:
 		:param frame: frame on which to  make the plots
 		:return: new frame with boxes and labels plotted.
 		"""
-		global fall 
+		global fall
+	        global hands_up	
 		box_filter = ok.copy()
 		for l in range(len(predictions)):
 			# the color of each person's body dot
@@ -305,7 +306,6 @@ def Server_process():
 	while True:
 		print('Connection from:',Client_addr)
 		while(player.isOpened()):
-			print(fall,hands_up)
 			if fall:
 				server_socket.sendto("fall".encode(), Client_addr)
 				print(fall)
