@@ -150,8 +150,11 @@ class ObjectDetection:
 				face_datumpoint = int(kp[1])
 			elif kp[4]>0 and kp[7]>0:
 		        	face_datumpoint = (int(kp[4])+int(kp[7]))/2
-			elif kp[13]>0 and kp[15]>0:
-				face_datumpoint = (int(kp[13])+int(kp[15]))/2	
+			elif kp[10]>0 and kp[13]>0:
+				face_datumpoint = (int(kp[10])+int(kp[13]))/2
+			elif kp[16]>0 and kp[19]>0:
+				face_datumpoint = (int(kp[16])+int(kp[19]))/2	
+
 
 			if kp[34]>0 and kp[37]>0:
 				body_datumpoint = ( int(kp[34]) + int(kp[37]) )/2 
