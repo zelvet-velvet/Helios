@@ -60,7 +60,7 @@ class ObjectDetection:
 
 	def load_model(self):
 		# mobilenetv3small, mobilenetv3large, resnet50, shufflenetv2k16, shufflenetv2k30
-		predictor = openpifpaf.Predictor(checkpoint='mobilenetv3small', json_data=True )
+		predictor = openpifpaf.Predictor(checkpoint='mobilenetv3large', json_data=True )
 		return predictor
 
 	def score_frame(self, frame):
