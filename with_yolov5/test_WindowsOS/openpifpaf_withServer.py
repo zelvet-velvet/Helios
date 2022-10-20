@@ -170,6 +170,7 @@ class ObjectDetection:
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)		
 				cv2.putText(box_filter,"Fall detected", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
+				print("fall=",fall)
 				fall = True
 
 
