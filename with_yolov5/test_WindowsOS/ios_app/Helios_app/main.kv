@@ -5,7 +5,7 @@ ScreenManager:
 	transition: FadeTransition()
 	duration: .001	
 	RunnerList_page:
-	#Stream_page:
+	Stream_page:
 	Profile_page:
 	Drone_page:
 	Notifications_page:
@@ -84,11 +84,10 @@ ScreenManager:
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .9}
 				Label:
-					id: notification_1	
 					pos_hint: {'center_x': .5, 'center_y': .9}
-					text: ""
+					text: "Members in station 2 nortice!"
 					color: 0,0,0,1
-					font_size: 40
+					font_size: 30
 					bold: True
 					halign: 'center'
 					valign: 
@@ -107,9 +106,9 @@ ScreenManager:
 					pos_hint: {'center_x': .5, 'center_y': .8}
 				Label:
 					pos_hint: {'center_x': .5, 'center_y': .8}
-					text: ""
+					text: "Members in station 1\ncan take turns having lunch."
 					color: 0,0,0,1
-					font_size: 40
+					font_size: 30
 					bold: True
 					halign: 'center'
 					valign: 
@@ -128,6 +127,7 @@ ScreenManager:
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .7}
 				Label:
+					id: notification_1	
 					pos_hint: {'center_x': .5, 'center_y': .7}
 					text: ""
 					color: 0,0,0,1
@@ -1040,7 +1040,8 @@ ScreenManager:
 
 <Map_page>:
 	name: 'map'
-	RelativeLayout:		
+	RelativeLayout:
+		#:set zoom 17	
 		# Root background
 		canvas:
 			Color:
@@ -1048,7 +1049,7 @@ ScreenManager:
 			Rectangle:
 				size: self.size
 				pos: self.pos		
-		
+
 		# logo "Helios"'s background image
 		Image:
 			canvas:
@@ -1086,9 +1087,43 @@ ScreenManager:
 					pos: 242, 42.51
 					size: (165, 165)
 		MapView:
+			id: mmap
 			lat: 24.179937
 			lon: 120.648201
-			zoom: 17
+			zoom: zoom
+
+		#:set pmbtn_color 139/255, 160/255, 217/255, 1
+		Button:
+			canvas.before:
+				Color:
+					rgba: pmbtn_color
+				RoundedRectangle:
+					size: self.size
+					pos: self.pos
+					radius: [10]
+			background_normal: 'drawable/plus.png'
+			background_down: 'drawable/plus.png'
+			size_hint: None, None
+			size: 75, 75
+			pos_hint: {'center_x': .92, 'center_y': .3}
+			on_release: 
+				root.manager.get_screen("map").ids.mmap.zoom = root.manager.get_screen("map").ids.mmap.zoom +1
+
+		Button:
+			canvas.before:
+				Color:
+					rgba: pmbtn_color
+				RoundedRectangle:
+					size: self.size
+					pos: self.pos
+					radius: [10]
+			background_normal: 'drawable/minus.png'
+			background_down: 'drawable/minus.png'
+			size_hint: None, None
+			size: 75, 75
+			pos_hint: {'center_x': .92, 'center_y': .23}
+			on_release: 
+				root.manager.get_screen("map").ids.mmap.zoom = root.manager.get_screen("map").ids.mmap.zoom -1
 
 		BoxLayout:
 			size_hint: None,None

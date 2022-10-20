@@ -161,27 +161,28 @@ class ObjectDetection:
 
 			# detect if someone gonna fall down
 			if abs( face_datumpoint - body_datumpoint ) < 10 and face_datumpoint!=-3 and body_datumpoint!=-3:
-				# plot on red frame if this person fall
+				# plot on red frame if this person fall								
 				upl = int(bbox[0]), int(bbox[1])
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)		
 				cv2.putText(box_filter,"Fall detected", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
 				fall = True
 
-			# set hands up pose detection
-			left_hand, right_hand  = -3,-3
-			if kp[22]>0 and kp[25]>0:
-				left_hand, right_hand=kp[22], kp[25]
-			if kp[28]>0 and kp[31]>0:
-				left_hand, right_hand=kp[28], kp[31]
 
-			if abs( left_hand - right_hand ) < 10 and left_hand!=-3 and right_hand!=-3:
+			# set hands up pose detection
+			hands  = -3
+			if kp[22]>0 and kp[25]>0:
+				hands = (int(kp[22])+int(kp[25]))/2
+			if kp[28]>0 and kp[31]>0:
+				hands = (int(kp[28])+int(kp[31]))/2
+
+			if ( face_datumpoint - hands)  > 30 and hands!=-3:
 				# plot on the frame if this person put her hands up
 				upl = int(bbox[0])+2, int(bbox[1])+2
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
-				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)
+				cv2.rectangle(box_filter, upl, buttomr, (0,255,255) , 1)
 				cv2.putText(box_filter,"Hands up", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,255,255), 1)
-				hands_up  = True
+				hands_up  = True	
 
 		Transparency = 0.7
 		ok = cv2.addWeighted(box_filter, Transparency, ok, 1 - Transparency, 0)

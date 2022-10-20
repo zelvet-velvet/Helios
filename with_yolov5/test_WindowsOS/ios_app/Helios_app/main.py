@@ -52,15 +52,15 @@ class Stream(Image):
 		super(Stream, self).__init__(**kwargs)
 		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.port = 60050 
-		socket_address = ('192.168.0.101', self.port)
+		socket_address = ('192.168.1.149', self.port)
 		#socket_address = ('10.22.48.120',self.port)
 		self.client_socket.bind(socket_address)
 		print("Client binded")
 		data = b""
 		payload_size = struct.calcsize("Q")
-		ip=('192.168.0.100',self.port)
+		ip=('192.168.1.187',self.port)
 		#ip=('10.22.75.87',self.port)
-		#self.client_socket.sendto(b"ewe!",ip)
+		self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
 	
 	def update(self, dt):
@@ -114,7 +114,7 @@ class main(App):
 
 		if fall:
 			App.get_running_app().root.get_screen('list').notification_1.text = "Drn_3 fall warning !"
-			App.get_running_app().root.get_screen('drone').ids.drn3_notice.source = "drawable/yellow_notice.png"
+			App.get_running_app().root.get_screen('drone').ids.drn3_notice.source = "drawable/red_notice.png"
 			App.get_running_app().root.get_screen('drone').ids.drn3_notice.size_hint_x = .1		
 			
 			App.get_running_app().root.get_screen('drone').ids.notice_drone.source = "drawable/red_notice.png"
@@ -129,29 +129,20 @@ class main(App):
 			App.get_running_app().root.get_screen('notifacation').ids.notice_drone.size_hint_x = .06
 		if hands_up:
 			App.get_running_app().root.get_screen('list').notification_1.text = "Drn_3 hamds up warning !"
-			App.get_running_app().root.get_screen('drone').ids.drn3_notice.source = "drawable/yellow_notice.png"
+			App.get_running_app().root.get_screen('drone').ids.drn3_notice.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('drone').ids.drn3_notice.size_hint_x = .06	
 			
-			App.get_running_app().root.get_screen('drone').ids.notice_drone.source = "drawable/yellow_notice.png"
+			App.get_running_app().root.get_screen('drone').ids.notice_drone.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('drone').ids.notice_drone.size_hint_x = .1	
-			App.get_running_app().root.get_screen('list').ids.notice_drone.source = "drawable/yellow_notice.png"
+			App.get_running_app().root.get_screen('list').ids.notice_drone.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('list').ids.notice_drone.size_hint_x = .1	
-			App.get_running_app().root.get_screen('profile').ids.notice_drone.source = "drawable/yellow_notice.png"
+			App.get_running_app().root.get_screen('profile').ids.notice_drone.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('profile').ids.notice_drone.size_hint_x = .1	
 			App.get_running_app().root.get_screen('map').ids.notice_drone.source = "drawable/yellow_notice.png"
 			App.get_running_app().root.get_screen('map').ids.notice_drone.size_hint_x = .1	
-			App.get_running_app().root.get_screen('notification').ids.notice_drone.source = "drawable/yellow_notice.png"
+			App.get_running_app().root.get_screen('notification').ids.notice_drone.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = .1	
 		
-		"""
-		global fall
-		global hands_up
-		img = Image(source='
-		App.get_running_app().get_screen('drone').add_widget()
-		if fall:
-				
-		if hands_up:
-		"""
 
 
 if __name__ == "__main__":
