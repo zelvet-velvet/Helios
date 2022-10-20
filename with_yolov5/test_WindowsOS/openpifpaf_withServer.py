@@ -164,7 +164,7 @@ class ObjectDetection:
 				body_datumpoint = ( int(kp[46]) + int(kp[49]) )/2 
 
 			# detect if someone gonna fall down
-			if abs( face_datumpoint - body_datumpoint ) < 10 and face_datumpoint!=-3 and body_datumpoint!=-3:
+			if abs( face_datumpoint - body_datumpoint ) < 20 and face_datumpoint!=-3 and body_datumpoint!=-3:
 				# plot on red frame if this person fall								
 				upl = int(bbox[0]), int(bbox[1])
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
