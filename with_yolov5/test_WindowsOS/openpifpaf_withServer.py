@@ -22,30 +22,26 @@ import imutils
 import threading
 import base64
 
-
+try:
+	local_ip = sys.argv[1]
+	if local_ip == "--help":
+		print("usage: python3 webcam_openpifpaf.py [self_IP_addr]")
+		exit()
+except:
+	print("error : missing local IP parameter")
+	print("usage: python3 webcam_openpifpaf.py [self_IP_addr]")
+	exit()
 
 output = ""
 player=""
+fall = False
+hands_up = False
 
 class ObjectDetection:
-	"""
-	The class performs generic object detection on a video file.
-	It uses yolo5 pretrained model to make inferences and opencv2 to manage frames.
-	Included Features:
-	1. Reading and writing of video file using  Opencv2
-	2. Using pretrained model to make inferences on frames.
-	3. Use the inferences to plot boxes on objects along with labels.
-	Upcoming Features:
-	"""
 	def __init__(self):
 		self.predictor = self.load_model()
 		self.predictions = ""
 	def get_video_from_file(self):
-		"""
-		Function creates a streaming object to read the video from the file frame by frame.
-		:param self:  class object
-		:return:  OpenCV object to stream video frame by frame.
-   		"""
 		drone = tellopy.Tello()
 		drone.connect()
 		drone.wait_for_connection(60.0)
@@ -64,25 +60,14 @@ class ObjectDetection:
 
 	def load_model(self):
 		# mobilenetv3small, mobilenetv3large, resnet50, shufflenetv2k16, shufflenetv2k30
-		predictor = openpifpaf.Predictor(checkpoint='mobilenetv3large', json_data=True )
+		predictor = openpifpaf.Predictor(checkpoint='mobilenetv3small', json_data=True )
 		return predictor
 
 	def score_frame(self, frame):
-		"""
-		function scores each frame of the video and returns results.
-		:param frame: frame to be infered.
-		:return: labels and coordinates of objects found.
-		"""
 		predictions, gt_anns, image_meta = self.predictor.numpy_image(frame)
 		return predictions, gt_anns, image_meta
 
 	def plot_boxes(self, predictions, ok):
-		"""
-		plots boxes and labels on frame.
-		:param results: inferences made by model
-		:param frame: frame on which to  make the plots
-		:return: new frame with boxes and labels plotted.
-		"""
 		fall = False
 		box_filter = ok.copy()
 		for l in range(len(predictions)):
@@ -196,6 +181,7 @@ class ObjectDetection:
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)
 				cv2.putText(box_filter,"Hands up", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,255,255), 1)
+				hands_up  = True
 
 		Transparency = 0.7
 		ok = cv2.addWeighted(box_filter, Transparency, ok, 1 - Transparency, 0)
@@ -233,11 +219,11 @@ class ObjectDetection:
 			output=self.frame
 
 			stream_modeling = threading.Thread(target = self.modeling)
-			#Server_processing = threading.Thread(target = Server_process)
+			Server_processing = threading.Thread(target = Server_process)
 			stream_modeling.daemon = True	
-			#Server_processing.daemon = True	
+			Server_processing.daemon = True	
 			stream_modeling.start()
-			#Server_processing.start()
+			Server_processing.start()
 			time.sleep(2)
 			break
 
@@ -264,9 +250,9 @@ def Server_process():
 	host_name  = socket.gethostname()
 	host_ip = socket.gethostbyname(host_name)
 
-	print('HOST IP:',"192.168.0.101")
+	print('HOST IP:', local_ip)
 	port = 60050
-	socket_address = ("192.168.0.101",port)
+	socket_address = (local_ip, port)
 	print('Socket created')
 
 
@@ -283,13 +269,15 @@ def Server_process():
 		print('Connection from:',Client_addr)
 		WIDTH=500
 		while(vid.isOpened()):
+			if fall:
+				server_socket.sendto("fall".encode(), Client_addr)
+				fall = False
+			if hands_up:
+				server_socket.sendto("hands_up".encode(), Client_addr)
+				hands_up = False
 			encoded,buffer = cv2.imencode('.jpg',output)
 			message = base64.b64encode(buffer)
 			server_socket.sendto(message,Client_addr)
-			cv2.imshow('Sending...',frame)
-			key = cv2.waitKey(10) 
-			if key ==13:
-				break		
 
 if __name__ == "__main__":
 	a = ObjectDetection()
