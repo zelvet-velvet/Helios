@@ -166,7 +166,7 @@ class ObjectDetection:
 
 			print(abs( face_datumpoint - body_datumpoint ))
 			# detect if someone gonna fall down
-			if abs( face_datumpoint - body_datumpoint ) < 20 and face_datumpoint!=-3 and body_datumpoint!=-3:
+			if abs( face_datumpoint - body_datumpoint ) < 50 and face_datumpoint!=-3 and body_datumpoint!=-3:
 				# plot on red frame if this person fall								
 				upl = int(bbox[0]), int(bbox[1])
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
