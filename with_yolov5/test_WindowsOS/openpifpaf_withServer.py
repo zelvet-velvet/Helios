@@ -68,7 +68,8 @@ class ObjectDetection:
 		return predictions, gt_anns, image_meta
 
 	def plot_boxes(self, predictions, ok):
-		fall = False
+		global fall
+		global hands_up
 		box_filter = ok.copy()
 		for l in range(len(predictions)):
 			# the color of each person's body dot
@@ -243,7 +244,8 @@ class ObjectDetection:
 
 
 def Server_process():
-
+	global fall
+	global hands_up
 	# Server socket
 	# create an INET, STREAMing socket
 	server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
