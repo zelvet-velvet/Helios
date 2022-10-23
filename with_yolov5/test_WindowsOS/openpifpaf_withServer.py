@@ -227,10 +227,13 @@ class ObjectDetection:
 
 			stream_modeling = threading.Thread(target = self.modeling)
 			Server_processing = threading.Thread(target = Server_process)
+			input_getting = threading.Thread(target = get_input)
 			stream_modeling.daemon = True	
 			Server_processing.daemon = True	
+			input_getting.daemon = True
 			stream_modeling.start()
 			Server_processing.start()
+			input_getting.start()
 			time.sleep(2)
 			break
 
