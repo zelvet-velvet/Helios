@@ -42,15 +42,16 @@ class ObjectDetection:
 		self.predictor = self.load_model()
 		self.predictions = ""
 	def get_video_from_file(self):
-		drone = tellopy.Tello()
-		drone.connect()
-		drone.wait_for_connection(60.0)
+		self.drone = tellopy.Tello()
+		self.drone.connect()
+		self.drone.takeoff()
+		self.drone.wait_for_connection(60.0)
 		retry = 3
 		self.container = None
 		while self.container is None and 0 < retry:
 			retry -= 1
 			try:
-				container = av.open(drone.get_video_stream())
+				container = av.open(self.drone.get_video_stream())
 			except av.AVError as ave:
 				print(ave)
 				print('retry...')
@@ -164,15 +165,13 @@ class ObjectDetection:
 				body_datumpoint = ( int(kp[46]) + int(kp[49]) )/2 
 
 
-			print(abs( face_datumpoint - body_datumpoint ))
 			# detect if someone gonna fall down
-			if abs( face_datumpoint - body_datumpoint ) < 50 and face_datumpoint!=-3 and body_datumpoint!=-3:
+			if abs( face_datumpoint - body_datumpoint ) < 30 and face_datumpoint!=-3 and body_datumpoint!=-3:
 				# plot on red frame if this person fall								
 				upl = int(bbox[0]), int(bbox[1])
 				buttomr = int(bbox[0]+bbox[2]), int(bbox[1]+bbox[3])
 				cv2.rectangle(box_filter, upl, buttomr, (0,0,255) , 1)		
 				cv2.putText(box_filter,"Fall detected", (int(bbox[0]),int(bbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.3, (0,0,255), 1)	
-				print("fall=",fall)
 				fall = True
 
 
@@ -219,7 +218,6 @@ class ObjectDetection:
 				frame_skip = frame_skip - 1
 				continue
 			break
-		print("ewe")
 
 		WIDTH =400
 		for frame in player:
@@ -237,19 +235,31 @@ class ObjectDetection:
 			break
 
 		print("-------- Thread initialized --------")
-	
-		for frame in player:
-			frame = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)		
-			self.frame = imutils.resize(frame,width=WIDTH)
-			output, fall = self.plot_boxes(self.predictions, self.frame)
-			"""
-			if fall:
-				print("Warning! Warning!")
-			"""
-			local_show = imutils.resize(output, 700)
-			cv2.imshow("ewe",local_show)
-			cv2.waitKey(1)
 
+
+		try:	
+			for frame in player:
+				frame = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)		
+				self.frame = imutils.resize(frame,width=WIDTH)
+				output, fall = self.plot_boxes(self.predictions, self.frame)
+				"""
+				if fall:
+					print("Warning! Warning!")
+				"""
+				local_show = imutils.resize(output, 700)
+				cv2.imshow("ewe",local_show)
+				cv2.waitKey(1)
+		except SystemExit:
+			self.drone.land()
+
+sent = b""
+def get_input():
+	global sent
+	while True:
+		data = b""
+		while not data:
+			data = input().encode()
+		sent = data
 
 def Server_process():
 	global fall
@@ -285,14 +295,20 @@ def Server_process():
 			if hands_up:
 				server_socket.sendto("hands_up".encode(), Client_addr)
 				hands_up = False
+			if sent:
+				server_socket.sendto(sent, Client_addr)	
+				sent = b""
+
 			encoded,buffer = cv2.imencode('.jpg',output)
 			message = base64.b64encode(buffer)
 			server_socket.sendto(message,Client_addr)
 
 if __name__ == "__main__":
-	a = ObjectDetection()
-	a()
-
+	try:
+		a = ObjectDetection()
+		a()
+	except SystemExit:
+		self.drone.land()
 
 
 

@@ -52,13 +52,13 @@ class Stream(Image):
 		super(Stream, self).__init__(**kwargs)
 		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.port = 60050 
-		socket_address = ('192.168.1.149', self.port)
+		socket_address = ('192.168.1.130', self.port)
 		#socket_address = ('10.22.48.120',self.port)
 		self.client_socket.bind(socket_address)
 		print("Client binded")
 		data = b""
 		payload_size = struct.calcsize("Q")
-		ip=('192.168.1.187',self.port)
+		ip=('192.168.1.131',self.port)
 		#ip=('10.22.75.87',self.port)
 		self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
@@ -66,26 +66,39 @@ class Stream(Image):
 	def update(self, dt):
 		global fall
 		global hands_up
-	
+		N = 0
 		packet,_ = self.client_socket.recvfrom(65536)
 		if packet.decode() == "fall":
 			fall = True
-		if packet.decode() == "hands_up":
+		elif packet.decode() == "hands_up":
 			hands_up = True
-		else:
-			start_time = time.time()
-			data = base64.b64decode(packet,' /')
-			npdata = np.frombuffer(data,dtype=np.uint8)
-			frame = cv2.imdecode(npdata,1)
-			frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
-			frame = imutils.resize(frame, 1200)
-			buf1 = cv2.flip(frame, 0)
-			buf = buf1.tobytes()
-			image_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
-			image_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
-			# display image from the texture
-			self.texture = image_texture
-			#print("FPS: ", 1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
+		else:	
+			try:
+				start_time = time.time()
+				data = base64.b64decode(packet,' /')
+				npdata = np.frombuffer(data,dtype=np.uint8)
+				frame = cv2.imdecode(npdata,1)
+				frame = cv2.rotate(frame, cv2.ROTATE_90_CLOCKWISE)
+				frame = imutils.resize(frame, 1200)
+				buf1 = cv2.flip(frame, 0)
+				buf = buf1.tobytes()
+				image_texture = Texture.create(size=(frame.shape[1], frame.shape[0]), colorfmt='bgr')
+				image_texture.blit_buffer(buf, colorfmt='bgr', bufferfmt='ubyte')
+				# display image from the texture
+				self.texture = image_texture
+				#print("FPS: ", 1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
+			except:
+				if N = 0:
+					App.get_running_app().root.get_screen('list').ids.notification_2.text = packet.decode()
+				elif N = 1:
+					App.get_running_app().root.get_screen('list').ids.notification_3.text = packet.decode()
+				elif N = 2:
+					App.get_running_app().root.get_screen('list').ids.notification_4.text = packet.decode()
+				elif N = 3:
+					App.get_running_app().root.get_screen('list').ids.notification_5.text = packet.decode()
+				elif N = 4:
+					App.get_running_app().root.get_screen('list').ids.notification_6.text = packet.decode()
+					
 
 class RunnerList_page(Screen):
 	pass
@@ -113,7 +126,8 @@ class main(App):
 		global hands_up
 
 		if fall:
-			App.get_running_app().root.get_screen('list').notification_1.text = "Drn_3 fall warning !"
+			App.get_running_app().root.get_screen('list').ids.notification_1.text = "Drn_3 fall warning !"
+			App.get_running_app().root.get_screen('list').ids.notification_1.color = 255,0,0,1
 			App.get_running_app().root.get_screen('drone').ids.drn3_notice.source = "drawable/red_notice.png"
 			App.get_running_app().root.get_screen('drone').ids.drn3_notice.size_hint_x = .1		
 			
@@ -126,9 +140,10 @@ class main(App):
 			App.get_running_app().root.get_screen('map').ids.notice_drone.source = "drawable/red_notice.png"
 			App.get_running_app().root.get_screen('map').ids.notice_drone.size_hint_x = .06
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.source = "drawable/red_notice.png"
-			App.get_running_app().root.get_screen('notifacation').ids.notice_drone.size_hint_x = .06
+			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = .06
 		if hands_up:
-			App.get_running_app().root.get_screen('list').notification_1.text = "Drn_3 hamds up warning !"
+			App.get_running_app().root.get_screen('list').ids.notification_1.text = "Drn_3 hamds up warning !"
+			App.get_running_app().root.get_screen('list').ids.notification_1.color = 255,0,0,1
 			App.get_running_app().root.get_screen('drone').ids.drn3_notice.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('drone').ids.drn3_notice.size_hint_x = .06	
 			
