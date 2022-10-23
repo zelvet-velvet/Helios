@@ -267,6 +267,7 @@ def get_input():
 def Server_process():
 	global fall
 	global hands_up
+	global sent
 	# Server socket
 	# create an INET, STREAMing socket
 	server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)

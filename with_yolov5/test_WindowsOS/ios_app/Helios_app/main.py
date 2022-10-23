@@ -52,13 +52,13 @@ class Stream(Image):
 		super(Stream, self).__init__(**kwargs)
 		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.port = 60050 
-		socket_address = ('192.168.1.130', self.port)
+		socket_address = ('192.168.0.101', self.port)
 		#socket_address = ('10.22.48.120',self.port)
 		self.client_socket.bind(socket_address)
 		print("Client binded")
 		data = b""
 		payload_size = struct.calcsize("Q")
-		ip=('192.168.1.131',self.port)
+		ip=('192.168.0.100',self.port)
 		#ip=('10.22.75.87',self.port)
 		self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
@@ -88,15 +88,15 @@ class Stream(Image):
 				self.texture = image_texture
 				#print("FPS: ", 1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
 			except:
-				if N = 0:
+				if N == 0:
 					App.get_running_app().root.get_screen('list').ids.notification_2.text = packet.decode()
-				elif N = 1:
+				elif N == 1:
 					App.get_running_app().root.get_screen('list').ids.notification_3.text = packet.decode()
-				elif N = 2:
+				elif N == 2:
 					App.get_running_app().root.get_screen('list').ids.notification_4.text = packet.decode()
-				elif N = 3:
+				elif N == 3:
 					App.get_running_app().root.get_screen('list').ids.notification_5.text = packet.decode()
-				elif N = 4:
+				elif N == 4:
 					App.get_running_app().root.get_screen('list').ids.notification_6.text = packet.decode()
 					
 
