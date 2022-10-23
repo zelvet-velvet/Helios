@@ -90,14 +90,19 @@ class Stream(Image):
 			except:
 				if N == 0:
 					App.get_running_app().root.get_screen('list').ids.notification_2.text = packet.decode()
+					N = N + 1
 				elif N == 1:
 					App.get_running_app().root.get_screen('list').ids.notification_3.text = packet.decode()
+					N = N + 1
 				elif N == 2:
 					App.get_running_app().root.get_screen('list').ids.notification_4.text = packet.decode()
+					N = N + 1
 				elif N == 3:
 					App.get_running_app().root.get_screen('list').ids.notification_5.text = packet.decode()
+					N = N + 1
 				elif N == 4:
 					App.get_running_app().root.get_screen('list').ids.notification_6.text = packet.decode()
+					N = N + 1
 					
 
 class RunnerList_page(Screen):
