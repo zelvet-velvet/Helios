@@ -177,6 +177,22 @@ class main(App):
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = .1	
 			hands_up = False
+		if fall == False:
+			App.get_running_app().root.get_screen('drone').ids.drn3_notice.size_hint_x = 0		
+			
+			App.get_running_app().root.get_screen('drone').ids.notice_drone.size_hint_x = 0
+			App.get_running_app().root.get_screen('list').ids.notice_drone.size_hint_x = 0
+			App.get_running_app().root.get_screen('profile').ids.notice_drone.size_hint_x = 0
+			App.get_running_app().root.get_screen('map').ids.notice_drone.size_hint_x = 0
+			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = 0
+		if hands_up == False:
+			App.get_running_app().root.get_screen('drone').ids.drn3_notice.size_hint_x = 0	
+			
+			App.get_running_app().root.get_screen('drone').ids.notice_drone.size_hint_x = 0	
+			App.get_running_app().root.get_screen('list').ids.notice_drone.size_hint_x = 0	
+			App.get_running_app().root.get_screen('profile').ids.notice_drone.size_hint_x = 0
+			App.get_running_app().root.get_screen('map').ids.notice_drone.size_hint_x = 0
+			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = 0
 
 
 if __name__ == "__main__":

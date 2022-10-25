@@ -240,7 +240,6 @@ class ObjectDetection:
 
 
 		try:
-			self.drone.takeoff()	
 			for frame in player:
 				frame = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)		
 				self.frame = imutils.resize(frame,width=WIDTH)
@@ -316,10 +315,12 @@ def Server_process():
 			if sent:
 				server_socket.sendto(sent, Client_addr)	
 				sent = b""
-
-			encoded,buffer = cv2.imencode('.jpg',output)
-			message = base64.b64encode(buffer)
-			server_socket.sendto(message,Client_addr)
+			try:
+				encoded,buffer = cv2.imencode('.jpg',output)
+				message = base64.b64encode(buffer)
+				server_socket.sendto(message,Client_addr)
+			except:
+				pass
 
 if __name__ == "__main__":
 	a = ObjectDetection()
