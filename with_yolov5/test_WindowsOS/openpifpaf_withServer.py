@@ -44,7 +44,6 @@ class ObjectDetection:
 	def get_video_from_file(self):
 		self.drone = tellopy.Tello()
 		self.drone.connect()
-		self.drone.takeoff()
 		self.drone.wait_for_connection(60.0)
 		retry = 3
 		self.container = None
@@ -240,7 +239,8 @@ class ObjectDetection:
 		print("-------- Thread initialized --------")
 
 
-		try:	
+		try:
+			self.drone.takeoff()	
 			for frame in player:
 				frame = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)		
 				self.frame = imutils.resize(frame,width=WIDTH)
@@ -257,13 +257,13 @@ class ObjectDetection:
 				if key == ord('t'):
 					self.drone.takeoff()
 				if key == ord('r'):
-					self.drone.set_throttle(1)
+					self.drone.set_throttle(0.5)
 				if key == ord('f'):
-					self.drone.set_throttle(-1)
+					self.drone.set_throttle(-0.5)
 				if key == ord('e'):
-					self.drone.set_yaw(1)
+					self.drone.set_yaw(0.5)
 				if key == ord('q'):
-					self.drone.set_yaw(-1)
+					self.drone.set_yaw(-0.5)
 				if key == ord('z'):
 					self.drone.set_throttle(0)
 					self.drone.set_yaw(0)

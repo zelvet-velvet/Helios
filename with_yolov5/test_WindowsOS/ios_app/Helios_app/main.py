@@ -159,6 +159,7 @@ class main(App):
 			App.get_running_app().root.get_screen('map').ids.notice_drone.size_hint_x = .06
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.source = "drawable/red_notice.png"
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = .06
+			fall = False
 		if hands_up:
 			App.get_running_app().root.get_screen('list').ids.notification_1.text = "Drn_3 hamds up warning !"
 			App.get_running_app().root.get_screen('list').ids.notification_1.color = 255,0,0,1
@@ -175,7 +176,7 @@ class main(App):
 			App.get_running_app().root.get_screen('map').ids.notice_drone.size_hint_x = .1	
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.source = "drawable/purple_notice.png"
 			App.get_running_app().root.get_screen('notification').ids.notice_drone.size_hint_x = .1	
-		
+			hands_up = False
 
 
 if __name__ == "__main__":
