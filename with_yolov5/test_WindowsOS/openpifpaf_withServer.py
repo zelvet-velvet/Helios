@@ -264,6 +264,9 @@ class ObjectDetection:
 					self.drone.set_yaw(1)
 				if key == ord('q'):
 					self.drone.set_yaw(-1)
+				if key == ord('z'):
+					self.drone.set_throttle(0)
+					self.drone.set_yaw(0)
 		except SystemExit:
 			self.drone.land()
 
@@ -289,13 +292,12 @@ def Server_process():
 	print('HOST IP:', local_ip)
 	port = 60050
 	socket_address = (local_ip, port)
-	print('Socket created')
 
 
 	# bind the socket to the host. 
 	#The values passed to bind() depend on the address family of the socket
 	server_socket.bind(socket_address)
-	print('Socket bind complete')
+	print('Socket bindng completed')
 	#listen() enables a server to accept() connections
 	#listen() has a backlog parameter. 
 	#It specifies the number of unaccepted connections that the system will allow before refusing new connections.
