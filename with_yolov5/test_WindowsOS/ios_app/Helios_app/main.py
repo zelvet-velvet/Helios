@@ -32,7 +32,7 @@ import time
 stream_on = False
 fall = False
 hands_up = False
-
+N = 0
 
 class UI_filter(Widget):
 	pass
@@ -52,21 +52,21 @@ class Stream(Image):
 		super(Stream, self).__init__(**kwargs)
 		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.port = 60050 
-		socket_address = ('192.168.0.101', self.port)
+		socket_address = ('192.168.1.130', self.port)
 		#socket_address = ('10.22.48.120',self.port)
 		self.client_socket.bind(socket_address)
 		print("Client binded")
 		data = b""
 		payload_size = struct.calcsize("Q")
-		ip=('192.168.0.100',self.port)
+		ip=('192.168.1.131',self.port)
 		#ip=('10.22.75.87',self.port)
-		self.client_socket.sendto(b"ewe!",ip)
+		#self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
 	
 	def update(self, dt):
 		global fall
 		global hands_up
-		N = 0
+		global N 
 		packet,_ = self.client_socket.recvfrom(65536)
 		if packet.decode() == "fall":
 			fall = True
