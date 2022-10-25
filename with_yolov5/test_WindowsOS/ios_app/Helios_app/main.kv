@@ -5,7 +5,7 @@ ScreenManager:
 	transition: FadeTransition()
 	duration: .001	
 	RunnerList_page:
-	Stream_page:
+	#Stream_page:
 	Profile_page:
 	Drone_page:
 	Notifications_page:
@@ -83,7 +83,9 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .9}
+					on_release: root.ids.nm1.text = ""
 				Label:
+					id: nm1
 					pos_hint: {'center_x': .5, 'center_y': .9}
 					text: "Members in station 2 nortice!"
 					color: 0,0,0,1
@@ -148,6 +150,7 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .6}
+					on_release: root.ids.notification_1.text = ""
 				Label:
 					id: notification_1	
 					pos_hint: {'center_x': .5, 'center_y': .6}
@@ -171,6 +174,7 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .5}
+					on_release: root.ids.notification_2.text = ""
 				Label:
 					id: notification_2	
 					pos_hint: {'center_x': .5, 'center_y': .5}
@@ -194,6 +198,7 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .4}
+					on_release: root.ids.notification_3.text = ""
 				Label:
 					id: notification_3	
 					pos_hint: {'center_x': .5, 'center_y': .4}
@@ -217,6 +222,7 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .3}
+					on_release: root.ids.notification_4.text = ""
 				Label:
 					id: notification_4	
 					pos_hint: {'center_x': .5, 'center_y': .3}
@@ -240,6 +246,7 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .2}
+					on_release: root.ids.notification_5.text = ""
 				Label:
 					id: notification_5	
 					pos_hint: {'center_x': .5, 'center_y': .2}
@@ -263,6 +270,7 @@ ScreenManager:
 					size_hint: None, None
 					size: 480, 100
 					pos_hint: {'center_x': .5, 'center_y': .1}
+					on_release: root.ids.notification_6.text = ""
 				Label:
 					id: notification_6	
 					pos_hint: {'center_x': .5, 'center_y': .1}
@@ -619,7 +627,6 @@ ScreenManager:
 					pos_hint: {'center_x': left_posX, 'center_y': posY_2}
 					on_release: 
 						app.root.current = 'stream'
-						stream_on = True
 				Label:	
 					pos_hint: {'center_x': left_posX, 'center_y': posY_2-lb_bias}
 					text: "Drn_3"

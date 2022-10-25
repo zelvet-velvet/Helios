@@ -251,7 +251,19 @@ class ObjectDetection:
 				"""
 				local_show = imutils.resize(output, 700)
 				cv2.imshow("ewe",local_show)
-				cv2.waitKey(1)
+				key = cv2.waitKey(1)
+				if key == ord('g'):
+					self.drone.land()
+				if key == ord('t'):
+					self.drone.takeoff()
+				if key == ord('r'):
+					self.drone.set_throttle(1)
+				if key == ord('f'):
+					self.drone.set_throttle(-1)
+				if key == ord('e'):
+					self.drone.set_yaw(1)
+				if key == ord('q'):
+					self.drone.set_yaw(-1)
 		except SystemExit:
 			self.drone.land()
 
@@ -308,11 +320,8 @@ def Server_process():
 			server_socket.sendto(message,Client_addr)
 
 if __name__ == "__main__":
-	try:
-		a = ObjectDetection()
-		a()
-	except SystemExit:
-		self.drone.land()
+	a = ObjectDetection()
+	a()
 
 
 

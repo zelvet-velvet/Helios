@@ -1,6 +1,4 @@
 
-# app establishing import
-from kivy.app import App
 # file and window manager import
 from kivy.lang import Builder
 from kivy.core.window import Window
@@ -34,6 +32,21 @@ fall = False
 hands_up = False
 N = 0
 
+# handling local ip and server ip
+try:
+	local_ip = sys.argv[1]
+	server_ip = sys.argv[2]
+	if local_ip == "--help":
+		print("usage: python3 webcam_openpifpaf.py [self_IP_addr] [server_IP_addr]")
+		exit()
+except:
+	print("error : missing local IP parameter")
+	print("usage: python3 webcam_openpifpaf.py [self_IP_addr] [server_IP_addr]")
+	exit()
+
+# app establishing import
+from kivy.app import App
+
 class UI_filter(Widget):
 	pass
 
@@ -52,15 +65,15 @@ class Stream(Image):
 		super(Stream, self).__init__(**kwargs)
 		self.client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		self.port = 60050 
-		socket_address = ('192.168.1.130', self.port)
+		socket_address = (local_ip, self.port)
 		#socket_address = ('10.22.48.120',self.port)
 		self.client_socket.bind(socket_address)
 		print("Client binded")
 		data = b""
 		payload_size = struct.calcsize("Q")
-		ip=('192.168.1.131',self.port)
+		ip=(server_ip,self.port)
 		#ip=('10.22.75.87',self.port)
-		#self.client_socket.sendto(b"ewe!",ip)
+		self.client_socket.sendto(b"ewe!",ip)
 		Clock.schedule_interval_free(self.update, 0.017)
 	
 	def update(self, dt):
