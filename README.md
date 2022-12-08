@@ -16,9 +16,10 @@ Our 5G structure in Science and Aerospace building 8 floors:
 CPE and 5G pRRH in Science and Aerospace building 8 floors:
 ![Alt text](screenshot/SAB_8floors'_set.png)
 # What we have done.
-
-# Can improve?
-
+We have made integration of real time stream from drone, pos detection and showing the results of warning and stream to our APP.  
+In November, we have participated in the Chunghwa Telecom 5G Innovation Application competition and be promoted in preliminary contest. 
+# What we can improve?
+Feng Chia University has the 5G environment for us to test which is something other can't. But due to the time limit
 
 
 
