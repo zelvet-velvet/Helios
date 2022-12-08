@@ -21,8 +21,8 @@ CPE and 5G pRRH in Science and Aerospace building 8 floors:
 We have made integration of real time stream from drone, pose detection and showing the results of warning and stream to our APP.  
 In November, we have participated in the Chunghwa Telecom 5G Innovation Application competition and be promoted in preliminary contest. 
 # What we can improve?
-About 5G integration with Helios:
+***About 5G integration with Helios:***
   Feng Chia University has the 5G environment for us to test which is something other can't. But due to the time limit of the 5G competition mention in above paragraph, we used 5G with Helios without measuring what the different with 4G and discrbing the advantage of using 5G. The things I mention are what we need to go on.
 
-About machine learning:
+***About machine learning:***
   We have used Openpifpaf with Pytorch for getting the keypoints prediction on limbs. Since Helios is my first project to self-learning about machine learning, so I only have learn about the image processing and the guide of machine learning. Recently, I have learned about CNN (convolutional neural network) and the way to approuch it, practicing them. The things we need to bring in Helios is the more advanced algorithm for detecting fall down and start to train some model to detect pose we want.
