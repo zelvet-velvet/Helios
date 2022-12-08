@@ -8,6 +8,6 @@ The Ａrea covering 5G. The 5G equipment is provided by MIC:
 ![Alt text](screenshot/FCU_ZoneOf5G.png)
 Our 5G structure in Science and Aerospace building 8 floors:
 ![Alt text](screenshot/FCU_5G_Structure.png)
-CPE and 5G pRRH in in Science and Aerospace building 8 floors:
+CPE and 5G pRRH in Science and Aerospace building 8 floors:
 ![Alt text](screenshot/SAB_8floors'_set.png)
 
