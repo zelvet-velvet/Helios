@@ -27,4 +27,5 @@ In November, we have participated in the Chunghwa Telecom 5G Innovation Applicat
 
 >***About machine learning:***
 
-  We have used Openpifpaf with Pytorch for getting the keypoints prediction on limbs. Since Helios is my first project to self-learning about machine learning, so I only have learn about the image processing and the guide of machine learning. Recently, I have learned about CNN (convolutional neural network) and the way to approuch it, practicing them. The things we need to bring in Helios is the more advanced algorithm for detecting fall down and start to train some model to detect pose we want.
+  We have used Openpifpaf with Pytorch for getting the keypoints prediction on limbs. Since Helios is my first project to self-learning about machine learning, so I only have learn about the image processing and the guide of machine learning. 
+  Recently, I have learned about CNN (convolutional neural network) and the way to approuch it, practicing them. The things we need to bring in Helios is the more advanced algorithm for detecting fall down and start to train some model to detect pose we want.
