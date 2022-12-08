@@ -6,3 +6,7 @@ Helios is a system like below image showing. We use drone Tello edu and using [P
 # Feng Chia University's 5G environment
 The image below is the Ａrea covering 5G. The 5G equipment is provided by MIC.
 ![Alt text](screenshot/FCU_ZoneOf5G.png)
+Our 5G structure in Science and Aerospace building 8 floors
+![Alt text](screenshot/FCU_5G_Structure.png)
+![Alt text](screenshot/SAB_8floors'_set.png)
+
