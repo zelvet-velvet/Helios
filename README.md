@@ -33,35 +33,35 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
     
 >torchvision (0.13.1+cpu):
 
-``` pip install torchvision==0.13.1 ```
+    pip install torchvision==0.13.1
      
 >cv2: 
->
-    ``` pip install cv2 ```
+
+    pip install cv2
      
 >openpifpaf: 
 
-``` pip install openpifpaf ```
+    pip install openpifpaf
      
 >av: 
 
-``` pip install av ```
+    pip install av
      
 >djitellopy: 
 
-``` pip install djitellopy ```
+    pip install djitellopy
      
 >tellopy: 
 
-``` pip install tellopy ```
+    pip install tellopy
      
 >imutils: 
 
-``` pip install imutils ```
+    pip install imutils
 
 >base64: 
 
-``` pip install base64 ```
+    pip install base64
 # What we have done.
 We have made integration of real time stream from drone, pose detection and showing the results of warning and stream to our APP.  
 
