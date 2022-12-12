@@ -37,7 +37,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
      
 >cv2: 
 >
-``` pip install cv2 ```
+    ``` pip install cv2 ```
      
 >openpifpaf: 
 
