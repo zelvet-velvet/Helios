@@ -24,7 +24,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 ***[Anaconda](https://docs.anaconda.com/anaconda/install/index.html) -> [Git](https://gitforwindows.org/
 ) -> Python3 (alias set up) -> Python lib -> terminal!***
 
-(things below are for my lab's set up.)
+(things below are for my lab's PCs set up.)
 
 ***Python lib required:***
 >torch (1.12.1+cpu):
