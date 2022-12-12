@@ -9,11 +9,15 @@ With drones at the setting locate, its will detect if runner fall down or have a
 ) -> Python3 (alias set up) -> Python lib -> terminal!***
 
 ***Python lib required:***
->torch (1.12.1+cpu) ``` pip install torch==1.12.1  ```
+>torch (1.12.1+cpu) 
+
+``` pip install torch==1.12.1  ```
     
->torchvision (0.13.1+cpu) ``` pip install torchvision==0.13.1 ```
+>torchvision (0.13.1+cpu) 
+``` pip install torchvision==0.13.1 ```
      
->cv2 ``` pip install cv2 ```
+>cv2 
+``` pip install cv2 ```
      
 >openpifpaf ``` pip install openpifpaf ```
      
