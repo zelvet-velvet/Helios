@@ -68,7 +68,6 @@ To avoid key in python or python3 in cmd direct to Microsoft store.
 Go to ```Settings > Apps > App execution aliases``` and turn off every installer are associated with Python.
 
 ![Alt text](screenshot/windowsapp_alias.png)
-
 Since we install Python via Anaconda, so we won's need to concern about setting Python's into root. But if some one need it check this [answer](https://stackoverflow.com/a/58773979).
 # What we have done.
 We have made integration of real time stream from drone, pose detection and showing the results of warning and stream to our APP.  
