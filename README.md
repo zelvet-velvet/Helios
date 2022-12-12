@@ -5,7 +5,7 @@ Helios is a system like below image showing. Helios is been created for the purp
 
 With drones at the setting locate, its will detect if runner fall down or have a pose to drone. If so our staff in medical station or staff who notice the warning on their phonet will be able to check the stream from the drone. They will find the runner with the warning shows and give runner the help they need. 
 # Env
-***Anaconda -> [Git](https://gitforwindows.org/
+***[Anaconda](https://docs.anaconda.com/anaconda/install/index.html) -> [Git](https://gitforwindows.org/
 ) -> Python3 (alias set up) -> Python lib -> terminal!***
 
 ***Python lib required:***
