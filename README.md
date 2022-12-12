@@ -45,7 +45,7 @@ With drones at the setting locate, its will detect if runner fall down or have a
 
 ``` pip install base64 ```
 # Using
-We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf]([https://pytorch.org/](https://openpifpaf.github.io/intro.html)) to fullfill Image detection. About our simple Helios APP, we use [Kivy](https://kivy.org/) as our APP development framework. 
+We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf](https://openpifpaf.github.io/intro.html) to fullfill Image detection. About our simple Helios APP, we use [Kivy](https://kivy.org/) as our APP development framework. 
 ![Alt text](screenshot/Helios_Structure.png)
 ![Alt text](screenshot/Helios_structureGIF.gif)
 >Simple structure:
