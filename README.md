@@ -18,7 +18,7 @@ djitellopy
 tellopy
      
 imutils
-\n
+
 base64
 # Introduction
 Helios is Zaviel Chung's undergraduate graduate project in Feng Chia University.
