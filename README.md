@@ -4,13 +4,21 @@
 
 ***Python lib required: 
     torch (1.12.1+cpu)
+    
      torchvision (0.13.1+cpu)
+     
      cv2
+     
      openpifpaf
+     
      av
+     
      djitellopy
+     
      tellopy
+     
      imutils
+     
      base64***
 # Introduction
 Helios is Zaviel Chung's undergraduate graduate project in Feng Chia University.
