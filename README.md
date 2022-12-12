@@ -29,10 +29,10 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 ***Python lib required:***
 >torch (1.12.1+cpu):
 
-``` pip install torch==1.12.1  ```
+    pip install torch==1.12.1 
     
 >torchvision (0.13.1+cpu):
->
+
 ``` pip install torchvision==0.13.1 ```
      
 >cv2: 
