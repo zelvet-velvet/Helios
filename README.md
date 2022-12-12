@@ -22,7 +22,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 ![Alt text](screenshot/SAB_8floors'_set.png)
 # Installation (Server's environment for Windows)
 ***[Anaconda](https://docs.anaconda.com/anaconda/install/index.html) -> [Git](https://gitforwindows.org/
-) -> Python3 ([alias set up](https://github.com/zelvet-velvet/Helios#alias-set-up-windows)) -> Python lib -> terminal!***
+) -> Python3 ([alias set up](# Alias set up (Windows))) -> Python lib -> terminal!***
 
 (settings below are for my lab's Windows PCs' set up.)
 
