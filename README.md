@@ -7,6 +7,7 @@ With drones at the setting locate, its will detect if runner fall down or have a
 # Env
 ***Anaconda -> [Git](https://gitforwindows.org/
 ) -> Python3 (alias set up) -> Python lib -> terminal!***
+
 ***Python lib required:***
 torch (1.12.1+cpu)
     
