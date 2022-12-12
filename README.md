@@ -20,9 +20,11 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 
 >CPE and 5G pRRH in Science and Aerospace building 8 floors:
 ![Alt text](screenshot/SAB_8floors'_set.png)
-# Env we use
+# Installation
 ***[Anaconda](https://docs.anaconda.com/anaconda/install/index.html) -> [Git](https://gitforwindows.org/
 ) -> Python3 (alias set up) -> Python lib -> terminal!***
+
+(things below are for my lab's set up.)
 
 ***Python lib required:***
 >torch (1.12.1+cpu):
