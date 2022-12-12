@@ -65,7 +65,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 # Alias set up (Windows)
 To avoid key in python or python3 in cmd direct to Microsoft store.
 
-Go to ```Settings > Apps > App execution aliases``` and turn off every installer are associated with Python.
+Go to ```Settings →  Apps →  App execution aliases``` and turn off every installer are associated with Python.
 
 ![Alt text](screenshot/windowsapp_alias.png)
 
