@@ -1,5 +1,6 @@
 # Helios 
-***Anaconda -> Git -> Python3 (alias set up) -> Python lib -> terminal!***
+***Anaconda -> [Git](https://gitforwindows.org/
+) -> Python3 (alias set up) -> Python lib -> terminal!***
 
 ***Python lib required: torch (1.12.1+cpu), torchvision (0.13.1+cpu), cv2, openpifpaf, av, djitellopy, tellopy, imutils, base64***
 # Introduction
