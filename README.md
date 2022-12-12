@@ -1,5 +1,6 @@
 # Helios 
 ***Anaconda -> Git -> Python3 (alias set up) -> Python lib -> terminal!***
+
 ***Python lib required: torch, cv2, openpifpaf, av, djitellopy, tellopy, imutils, base64***
 # Introduction
 Helios is Zaviel Chung's undergraduate graduate project in Feng Chia University.
