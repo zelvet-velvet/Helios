@@ -1,5 +1,5 @@
 # Helios 
-Python lib required: torch, cv2, openpifpaf, av, djitellopy, tellopy, imutils, base64
+***Python lib required: torch, cv2, openpifpaf, av, djitellopy, tellopy, imutils, base64***
 # Introduction
 Helios is Zaviel Chung's undergraduate graduate project in Feng Chia University.
 Helios is a system like below image showing. Helios is been created for the purpose of saving someone who facing accidental problem in any kinds of activities. We suppose the sport activity with a short length of runway. 
