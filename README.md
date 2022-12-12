@@ -14,22 +14,36 @@ With drones at the setting locate, its will detect if runner fall down or have a
 ``` pip install torch==1.12.1  ```
     
 >torchvision (0.13.1+cpu) 
+>
 ``` pip install torchvision==0.13.1 ```
      
 >cv2 
+>
 ``` pip install cv2 ```
      
->openpifpaf ``` pip install openpifpaf ```
-     
->av ``` pip install av ```
-     
->djitellopy ``` pip install djitellopy ```
-     
->tellopy ``` pip install tellopy ```
-     
->imutils ``` pip install imutils ```
+>openpifpaf 
 
->base64 ``` pip install base64 ```
+``` pip install openpifpaf ```
+     
+>av 
+
+``` pip install av ```
+     
+>djitellopy 
+
+``` pip install djitellopy ```
+     
+>tellopy 
+
+``` pip install tellopy ```
+     
+>imutils 
+
+``` pip install imutils ```
+
+>base64 
+
+``` pip install base64 ```
 # Using
 We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf]([https://pytorch.org/](https://openpifpaf.github.io/intro.html)) to fullfill Image detection. About our simple Helios APP, we use [Kivy](https://kivy.org/) as our APP development framework. 
 ![Alt text](screenshot/Helios_Structure.png)
