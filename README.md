@@ -67,7 +67,6 @@ In November, we have participated in the Chunghwa Telecom 5G Innovation Applicat
 ###### About 5G integration with Helios:
 
   Feng Chia University has the 5G environment for us to test which is something other can't. But due to the time limit of the 5G competition mention in above paragraph, we used 5G with Helios without measuring what the different with 4G and discrbing the advantage of using 5G. The things I mention are what we need to go on.
-
 ###### About machine learning:
 
   We have used Openpifpaf with Pytorch for getting the keypoints prediction on limbs. Since Helios is my first project to self-learning about machine learning, so I only have learn about the image processing and the guide of machine learning. 
