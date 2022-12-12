@@ -64,8 +64,10 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
     pip install base64
 # Alias set up (Windows)
 To avoid key in python or python3 in cmd direct to Microsoft store.
-![Alt text](screenshot/windowsapp_alias.png)
+
 Go to ```Settings > Apps > App execution aliases``` and turn off every installer are associated with Python.
+
+![Alt text](screenshot/windowsapp_alias.png)
 
 Since we install Python via Anaconda, so we won's need to concern about setting Python's into root. But if some one need it check this [answer](https://stackoverflow.com/a/58773979).
 # What we have done.
