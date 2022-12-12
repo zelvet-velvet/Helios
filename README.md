@@ -2,24 +2,24 @@
 ***Anaconda -> [Git](https://gitforwindows.org/
 ) -> Python3 (alias set up) -> Python lib -> terminal!***
 
-***Python lib required: 
+Python lib required: 
     torch (1.12.1+cpu)
     
-     torchvision (0.13.1+cpu)
+    torchvision (0.13.1+cpu)
      
-     cv2
+    cv2
      
-     openpifpaf
+    openpifpaf
      
-     av
+    av
      
-     djitellopy
+    djitellopy
      
-     tellopy
+    tellopy
      
-     imutils
+    imutils
      
-     base64***
+    base64
 # Introduction
 Helios is Zaviel Chung's undergraduate graduate project in Feng Chia University.
 Helios is a system like below image showing. Helios is been created for the purpose of saving someone who facing accidental problem in any kinds of activities. We suppose the sport activity with a short length of runway. 
