@@ -27,14 +27,6 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 ) -> Python3 ([alias set up](#alias-set-up-windows)) -> [Python lib](#python-lib-required) -> terminal !***
 
 ###### ***Python lib required:***
->torch (1.12.1+cpu):
-
-    pip install torch==1.12.1 
-    
->torchvision (0.13.1+cpu):
-
-    pip install torchvision==0.13.1
-     
 >cv2: 
 
     pip install opencv-python
@@ -62,6 +54,16 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 >base64: 
 
     pip install base64
+    
+(if needed:)
+>torch (1.12.1+cpu):
+
+    pip install torch==1.12.1 
+    
+>torchvision (0.13.1+cpu):
+
+    pip install torchvision==0.13.1
+     
 # Alias set up (Windows)
 To avoid key in python or python3 in cmd direct to Microsoft store.
 
