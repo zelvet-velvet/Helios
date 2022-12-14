@@ -39,7 +39,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 
     pip install opencv-python
      
->openpifpaf: 
+>openpifpaf (remember to install c++, since openpifpaf has c++ file): 
 
     pip install openpifpaf
      
