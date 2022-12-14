@@ -55,7 +55,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 
     pip install base64
     
-(if needed:)
+###### if needed:
 >torch (1.12.1+cpu):
 
     pip install torch==1.12.1 
