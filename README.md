@@ -56,7 +56,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
     pip install tellopy   
     
 ## Tello edu port setting
-[Portal](Demo_1220/README.md/#setting-about-tello-edu)
+👉🏻[Portal](Demo_1220/README.md/#setting-about-tello-edu)🌝
 
 ## If needed:
 >torch (1.12.1+cpu):
