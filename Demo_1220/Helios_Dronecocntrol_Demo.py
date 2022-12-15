@@ -1,4 +1,3 @@
-
 # stream processing
 import torch
 import numpy as np
@@ -11,7 +10,6 @@ import openpifpaf
 
 
 # tello lib
-from djitellopy import Tello
 import tellopy
 
 # socket estimating and sending data 
@@ -20,7 +18,6 @@ import pickle
 import struct
 import imutils
 import threading
-import base64
 
 
 output = ""
@@ -269,49 +266,6 @@ def get_input():
 			data = input().encode()
 		sent = data
 
-def Server_process():
-	global fall
-	global hands_up
-	global sent
-	# Server socket
-	# create an INET, STREAMing socket
-	server_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-	host_name  = socket.gethostname()
-	host_ip = socket.gethostbyname(host_name)
-
-	print('HOST IP:', local_ip)
-	port = 60050
-	socket_address = (local_ip, port)
-
-
-	# bind the socket to the host. 
-	#The values passed to bind() depend on the address family of the socket
-	server_socket.bind(socket_address)
-	print('Socket bindng completed')
-	#listen() enables a server to accept() connections
-	#listen() has a backlog parameter. 
-	#It specifies the number of unaccepted connections that the system will allow before refusing new connections.
-
-	indata, Client_addr = server_socket.recvfrom(1024)
-	while True:
-		print('Connection from:',Client_addr)
-		WIDTH=500
-		while(True):
-			if fall:
-				server_socket.sendto("fall".encode(), Client_addr)
-				fall = False
-			if hands_up:
-				server_socket.sendto("hands_up".encode(), Client_addr)
-				hands_up = False
-			if sent:
-				server_socket.sendto(sent, Client_addr)	
-				sent = b""
-			try:
-				encoded,buffer = cv2.imencode('.jpg',output)
-				message = base64.b64encode(buffer)
-				server_socket.sendto(message,Client_addr)
-			except:
-				pass
 
 if __name__ == "__main__":
 	a = ObjectDetection()
