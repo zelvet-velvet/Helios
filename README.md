@@ -53,12 +53,7 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
      
 >tellopy: 
 
-    pip install tellopy
-     
-## Setting about Tello edu
-![Alt text](screenshot/windows_setting.jpg)
-
-![Alt text](screenshot/advancedsetting_firewall.jpg)
+    pip install tellopy   
 
 ## If needed:
 >torch (1.12.1+cpu):
