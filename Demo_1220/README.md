@@ -10,3 +10,9 @@
 > Add new input rule
 ![Alt text](../screenshot/inputrule.jpg)
 
+> We need to add UDP port: 11111, 8889, 8890. Follow the steps below (If this setting don't work try to shut down firewall **temporary**)
+![Alt text](../screenshot/advanced_settingsteps/step1.jpg)
+![Alt text](../screenshot/advanced_settingsteps/step2.jpg)
+![Alt text](../screenshot/advanced_settingsteps/step3.jpg)
+![Alt text](../screenshot/advanced_settingsteps/step4.jpg)
+![Alt text](../screenshot/advanced_settingsteps/step5.jpg)
