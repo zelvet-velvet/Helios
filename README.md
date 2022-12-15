@@ -33,11 +33,11 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
      
 >openpifpaf (remember to install c++, since openpifpaf has c++ file): 
 
-    pip install openpifpaf
+    pip install openpifpaf==0.13.5
      
 >av: 
 
-    pip install av
+    pip install av==9.2.0
      
 >djitellopy: 
 
