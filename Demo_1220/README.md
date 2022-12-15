@@ -1,3 +1,3 @@
 >Simple keyboard control
 
-![Alt text](image/serverkbctrl_guide.png)
+  ![Alt text](image/serverkbctrl_guide.png)
