@@ -6,3 +6,7 @@
 
 > Enter "進階設定"
 ![Alt text](../screenshot/advancedsetting_firewall.jpg)
+
+> Add new input rule
+![Alt text](../screenshot/inputrule.jpg)
+
