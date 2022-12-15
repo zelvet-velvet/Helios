@@ -56,13 +56,13 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
     pip install base64
     
 ###### if needed:
-    >torch (1.12.1+cpu):
+>torch (1.12.1+cpu):
 
-        pip install torch==1.12.1 
+    pip install torch==1.12.1 
     
-    >torchvision (0.13.1+cpu):
+>torchvision (0.13.1+cpu):
 
-        pip install torchvision==0.13.1
+    pip install torchvision==0.13.1
      
 # Alias set up (Windows)
 Since we install Python via Anaconda, so we won's need to concern about setting Python's into root. If someone needs it check this [solution](https://stackoverflow.com/a/58773979).
