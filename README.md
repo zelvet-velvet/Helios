@@ -8,6 +8,7 @@ With drones at the setting locate, its will detect if runner fall down or have a
 We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf](https://openpifpaf.github.io/intro.html) to fullfill Image detection. About our simple Helios APP, we use [Kivy](https://kivy.org/) as our APP development framework. 
 >Helios process
 ![Alt text](screenshot/Helios_Structure.png)
+
 >Helios 
 ![Alt text](screenshot/Helios_structureGIF.gif)
 
