@@ -39,14 +39,6 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 
     pip install av==9.2.0
      
->djitellopy: 
-
-    pip install djitellopy
-     
->tellopy: 
-
-    pip install tellopy
-     
 >imutils: 
 
     pip install imutils
@@ -55,6 +47,19 @@ We use drone Tello edu and using [Pytorch](https://pytorch.org/) and [Openpifpaf
 
     pip install base64
     
+>djitellopy: 
+
+    pip install djitellopy
+     
+>tellopy: 
+
+    pip install tellopy
+     
+## Setting about Tello edu
+![Alt text](screenshot/windows_setting.jpg)
+
+![Alt text](screenshot/advancedsetting_firewall.jpg)
+
 ## If needed:
 >torch (1.12.1+cpu):
 
