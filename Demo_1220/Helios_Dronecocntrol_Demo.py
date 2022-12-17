@@ -254,6 +254,12 @@ class ObjectDetection:
 				if key == ord('z'):
 					self.drone.set_throttle(0)
 					self.drone.set_yaw(0)
+				if key == ord('x'):
+					self.drone.set_throttle(0)
+					self.drone.set_yaw(0)
+					self.drone.land()
+					time.sleep(2.5)
+					exit()
 		except SystemExit:
 			self.drone.land()
 
