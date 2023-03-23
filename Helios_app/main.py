@@ -40,7 +40,7 @@ try:
 		print("usage: python3 main.py [self_IP_addr] [server_IP_addr]")
 		exit()
 except:
-	print("error : missing local IP parameter")
+	print("error : missing local IP or serrver IP parameter")
 	print("usage: python3 main.py [self_IP_addr] [server_IP_addr]")
 	exit()
 
