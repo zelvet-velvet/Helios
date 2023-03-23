@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import time 
 import sys
+import signal
 import av
 import random
 import openpifpaf
@@ -18,6 +19,7 @@ import pickle
 import struct
 import imutils
 import threading
+
 
 
 output = ""
@@ -193,6 +195,12 @@ class ObjectDetection:
 			elapsed_time = et - st
 			print('Execution time:', elapsed_time, 'seconds')
 			"""
+
+	def signal_handler(signum, frame):
+		if signum == signal.SIGINT.value:
+			self.drone.land()
+			sys.exit(1)
+
 	def __call__(self):
 		global player
 		global output
@@ -228,6 +236,7 @@ class ObjectDetection:
 
 
 		try:
+			signal.signal(signal.SIGINT, self.signal_handler())
 			for frame in player:
 				frame = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)		
 				self.frame = imutils.resize(frame,width=WIDTH)
@@ -258,10 +267,12 @@ class ObjectDetection:
 					self.drone.set_throttle(0)
 					self.drone.set_yaw(0)
 					self.drone.land()
-					time.sleep(2.5)
+					time.sleep(0.5)
 					exit()
 		except SystemExit:
 			self.drone.land()
+
+
 
 sent = b""
 def get_input():
