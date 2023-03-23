@@ -37,11 +37,11 @@ try:
 	local_ip = sys.argv[1]
 	server_ip = sys.argv[2]
 	if local_ip == "--help":
-		print("usage: python3 webcam_openpifpaf.py [self_IP_addr] [server_IP_addr]")
+		print("usage: python3 main.py [self_IP_addr] [server_IP_addr]")
 		exit()
 except:
 	print("error : missing local IP parameter")
-	print("usage: python3 webcam_openpifpaf.py [self_IP_addr] [server_IP_addr]")
+	print("usage: python3 main.py [self_IP_addr] [server_IP_addr]")
 	exit()
 
 # app establishing import
